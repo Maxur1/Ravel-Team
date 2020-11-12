@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Probando
+                    probando otra vez
                 </div>
 
                 <div class="links">
