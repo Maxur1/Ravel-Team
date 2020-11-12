@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Su conflicto
+                    AHHHHHHHHHHHHHHHHHHHHHHH
                 </div>
 
                 <div class="links">
