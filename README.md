@@ -1,4 +1,4 @@
-<p align="center"><img src="https://www.ucn.cl/wp-content/uploads/2016/03/Isologo-UCN-2018.png" width="400"></p>
+<p align="center"><img src="https://www.ucn.cl/wp-content/uploads/2016/03/Isologo-UCN-2018.png" width="1373" height="318"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
