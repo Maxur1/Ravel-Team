@@ -1,4 +1,4 @@
-<p align="center"><img src="https://sites.google.com/a/ucn.cl/seminariodelta/_/rsrc/1255885647682/config/app/images/logoucn.jpg" width="800" height="200"></p>
+<p align="center"><img src="https://sites.google.com/a/ucn.cl/seminariodelta/_/rsrc/1255885647682/config/app/images/logoucn.jpg" width="1000" height="462"></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
