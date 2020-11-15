@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class secretaria extends Model
+class Secretaria extends Model
 {
     //
 }
