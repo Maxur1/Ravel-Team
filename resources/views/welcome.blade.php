@@ -81,7 +81,11 @@
 
             <div class="content">
                 <div class="title m-b-md">
+<<<<<<< HEAD
                     NekoDarkZ
+=======
+                    revisando si funciono
+>>>>>>> Maxur
                 </div>
 
                 <div class="links">
