@@ -194,4 +194,5 @@ class Excel implements Exporter, Importer
 
         return $this->writer->export($export, $writerType);
     }
+    
 }
