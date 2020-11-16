@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    AHHHHHHHHHHHHHHHHHHHHHHH
+                    NekoDarkZ
                 </div>
 
                 <div class="links">
