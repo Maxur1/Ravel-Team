@@ -19,8 +19,13 @@ class EstudianteImport implements ToModel,WithHeadingRow
     */
     public function model(array $row)
     {
+        $reemplazos = array(
+            '-'             => '',
+            '.'             => ''
+        );
         return new Estudiante([
             'rut' => $row['Rut'],
+            'rut' => strtr( $row['Rut'] , $reemplazos ),
             'paterno' => $row['Apellido Paterno'],
             'materno' => $row['Apellido Materno'],
             'nombre' => $row['Nombre'],
