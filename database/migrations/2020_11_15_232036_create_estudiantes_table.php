@@ -18,7 +18,7 @@ class CreateEstudiantesTable extends Migration
             $table->string('paterno');
             $table->string('materno');
             $table->string('nombre');
-            $table->string('carrera');
+            $table->integer('carrera');
             $table->string('correo');
             $table->timestamps();
         });
