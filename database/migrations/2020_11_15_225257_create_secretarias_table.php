@@ -14,7 +14,11 @@ class CreateSecretariasTable extends Migration
     public function up()
     {
         Schema::create('secretarias', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('correo')->unique();
+            $table->string('clave');
+            $table->string('rol');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
