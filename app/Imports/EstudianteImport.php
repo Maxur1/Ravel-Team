@@ -6,6 +6,10 @@ use App\Estudiante;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+
+HeadingRowFormatter::default('none');
+
 class EstudianteImport implements ToModel,WithHeadingRow
 {
     /**
@@ -16,12 +20,12 @@ class EstudianteImport implements ToModel,WithHeadingRow
     public function model(array $row)
     {
         return new Estudiante([
-            'rut' => $row['rut'],
-            'paterno' => $row['paterno'],
-            'materno' => $row['materno'],
-            'nombre' => $row['nombre'],
-            'carrera' => $row['carrera'],
-            'correo' => $row['correo']
+            'rut' => $row['Rut'],
+            'paterno' => $row['Apellido Paterno'],
+            'materno' => $row['Apellido Materno'],
+            'nombre' => $row['Nombre'],
+            'carrera' => $row['Carrera'],
+            'correo' => $row['Correo']
         ]);
     }
 }
