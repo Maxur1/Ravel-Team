@@ -3,25 +3,48 @@
 namespace App\Imports;
 
 use App\Estudiante;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
 
-class EstudianteImport implements ToModel,WithHeadingRow
+use Maatwebsite\Excel\Imports\HeadingRowFormatter;
+
+HeadingRowFormatter::default('none');
+
+class EstudianteImport implements ToModel,WithHeadingRow, WithValidation
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+    use Importable;
+
     public function model(array $row)
     {
+        $reemplazos = array(
+            '-'             => '',
+            '.'             => ''
+        );
         return new Estudiante([
-            'rut' => $row['rut'],
-            'paterno' => $row['paterno'],
-            'materno' => $row['materno'],
-            'nombre' => $row['nombre'],
-            'carrera' => $row['carrera'],
-            'correo' => $row['correo']
+            'rut' => $row['Rut'],
+            'rut' => strtr( $row['Rut'] , $reemplazos ),
+            'paterno' => $row['Apellido Paterno'],
+            'materno' => $row['Apellido Materno'],
+            'nombre' => $row['Nombre'],
+            'carrera' => $row['Carrera'],
+            'correo' => $row['Correo']
         ]);
+    }
+
+    public function rules(): array
+    {
+        return [
+             'Carrera' => Rule::in(['Carrera']),
+             
+             // Can also use callback validation rules
+             'Carrera' => function($attribute, $value, $onFailure) {
+                  if (!is_integer($value)) {
+                    $onFailure(': codigo Carrera no es un entero.');
+                  }
+              }
+        ];
     }
 }
