@@ -42,10 +42,10 @@
             @foreach($estudiantes as $est)
                 <tr>
                     <td>{{$est->rut}}</td>
-                    <td>{{$est->paterno}}</td>
-                    <td>{{$est->materno}}</td>
+                    <td>{{$est->apellidoPaterno}}</td>
+                    <td>{{$est->apellidoMaterno}}</td>
                     <td>{{$est->nombre}}</td>
-                    <td>{{$est->carrera}}</td>
+                    <td>{{$est->codigoCarrera}}</td>
                     <td>{{$est->correo}}</td>
                 </tr>
             @endforeach
