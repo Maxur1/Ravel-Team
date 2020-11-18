@@ -10,7 +10,7 @@
  <body>
   <br />
   <div class="container box">
-   <h3 align="center">Live search in laravel using AJAX</h3><br />
+   <h3 align="center">Lista de Alumnos</h3><br />
    <div class="panel panel-default">
     <div class="panel-heading">Buscar Alumno</div>
     <div class="panel-body">
