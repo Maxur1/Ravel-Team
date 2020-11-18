@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Sample_data;
+use App\Estudiante;
 use Illuminate\Http\Request;
 use DataTables;
 use Validator;
@@ -18,7 +18,7 @@ class SampleController extends Controller
     {
         if($request->ajax())
         {
-            $data = Sample_data::latest()->get();
+            $data = Estudiante::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
                         $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
@@ -74,7 +74,7 @@ class SampleController extends Controller
             'correo'        =>  $request->correo
         );
 
-        Sample_data::create($form_data);
+        Estudiante::create($form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
 
@@ -83,7 +83,7 @@ class SampleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Sample_data  $sample_data
+     * @param  \App\Estudiante  $sample_data
      * @return \Illuminate\Http\Response
      */
     public function show(Sample_data $sample_data)
@@ -101,7 +101,7 @@ class SampleController extends Controller
     {
         if(request()->ajax())
         {
-            $data = Sample_data::findOrFail($id);
+            $data = Estudiante::findOrFail($id);
             return response()->json(['result' => $data]);
         }
     }
@@ -140,7 +140,7 @@ class SampleController extends Controller
             'correo'        =>  $request->correo
         );
 
-        Sample_data::whereId($request->hidden_id)->update($form_data);
+        Estudiante::whereId($request->hidden_id)->update($form_data);
 
         return response()->json(['success' => 'Data is successfully updated']);
 
@@ -154,7 +154,7 @@ class SampleController extends Controller
      */
     public function destroy($id)
     {
-        $data = Sample_data::findOrFail($id);
+        $data = Estudiante::findOrFail($id);
         $data->delete();
     }
 }

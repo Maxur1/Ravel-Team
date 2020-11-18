@@ -52,9 +52,9 @@
          <form method="post" id="sample_form" class="form-horizontal">
           @csrf
           <div class="form-group">
-            <label class="control-label col-md-4" >First Name : </label>
+            <label class="control-label col-md-4" >Correo : </label>
             <div class="col-md-8">
-             <input type="text" name="first_name" id="first_name" class="form-control" />
+             <input type="text" name="correo" id="correo" class="form-control" />
             </div>
            </div>
            <div class="form-group">
@@ -97,7 +97,7 @@
 <script>
 $(document).ready(function(){
 
- $('#user_table').DataTable({
+ $('#estudiantes').DataTable({
   processing: true,
   serverSide: true,
   ajax: {
@@ -180,7 +180,7 @@ $(document).ready(function(){
     {
      html = '<div class="alert alert-success">' + data.success + '</div>';
      $('#sample_form')[0].reset();
-     $('#user_table').DataTable().ajax.reload();
+     $('#estudiantes').DataTable().ajax.reload();
     }
     $('#form_result').html(html);
    }
@@ -195,8 +195,12 @@ $(document).ready(function(){
    dataType:"json",
    success:function(data)
    {
-    $('#first_name').val(data.result.first_name);
-    $('#last_name').val(data.result.last_name);
+    //$('#rut').val(data.result.rut);
+    //$('#apellidoPaterno').val(data.result.apellidoPaterno);
+    //$('#apellidoMaterno').val(data.result.apellidoMaterno);
+    //$('#nombre').val(data.result.nombre);
+    //$('#codigoCarrera').val(data.result.codigoCarrera);
+    $('#correo').val(data.result.correo);
     $('#hidden_id').val(id);
     $('.modal-title').text('Edit Record');
     $('#action_button').val('Edit');
@@ -223,7 +227,7 @@ $(document).ready(function(){
    {
     setTimeout(function(){
      $('#confirmModal').modal('hide');
-     $('#user_table').DataTable().ajax.reload();
+     $('#estudiantes').DataTable().ajax.reload();
      alert('Data Deleted');
     }, 2000);
    }
