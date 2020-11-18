@@ -26,10 +26,10 @@ class EstudianteImport implements ToModel,WithHeadingRow, WithValidation
         return new Estudiante([
             'rut' => $row['Rut'],
             'rut' => strtr( $row['Rut'] , $reemplazos ),
-            'paterno' => $row['Apellido Paterno'],
-            'materno' => $row['Apellido Materno'],
+            'apellidoPaterno' => $row['Apellido Paterno'],
+            'apellidoMaterno' => $row['Apellido Materno'],
             'nombre' => $row['Nombre'],
-            'carrera' => $row['Carrera'],
+            'codigoCarrera' => $row['Carrera'],
             'correo' => $row['Correo']
         ]);
     }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSecretariasTable extends Migration
+class CreateSampleDatasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,8 @@ class CreateSecretariasTable extends Migration
      */
     public function up()
     {
-        Schema::create('secretarias', function (Blueprint $table) {
-            $table->string('nombre');
-            $table->string('correo')->unique();
-            $table->string('clave');
-            $table->string('rol');
-            $table->rememberToken();
+        Schema::create('sample_datas', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->timestamps();
         });
     }
@@ -30,6 +26,6 @@ class CreateSecretariasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('secretarias');
+        Schema::dropIfExists('sample_datas');
     }
 }
