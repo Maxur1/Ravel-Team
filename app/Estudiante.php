@@ -2,35 +2,20 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
-class User extends Authenticatable
+class Estudiante extends Model
 {
-    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'rut', 'apellidoPaterno', 'apellidoMaterno', 'nombre',
-    ];
+    protected $table = "estudiantes";
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    protected $fillable = ['rut','paterno','materno','nombre','carrera','correo'];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        
-    ];
+    public static function getEstudiante()
+    {
+        $records = DB::table('estudiantes')->select("id","rut","paterno","materno","nombre","carrera","correo")->orderBy('id','asc')->get()->toArray();
+        return $records;
+    }
+   
 }
