@@ -19,7 +19,11 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
+<<<<<<< HEAD
     'reference' => NULL,
+=======
+    'reference' => '33b53656711b32e6aa4c19112854ea167d7e8c58',
+>>>>>>> 5a6b8e713e31a0fcaeeefd58409b1fe451432cc1
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -392,7 +396,11 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
+<<<<<<< HEAD
       'reference' => NULL,
+=======
+      'reference' => '33b53656711b32e6aa4c19112854ea167d7e8c58',
+>>>>>>> 5a6b8e713e31a0fcaeeefd58409b1fe451432cc1
     ),
     'laravel/tinker' => 
     array (
@@ -1180,6 +1188,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'bafc69caeb4d49c39fd0779086c03a3738cbb389',
+    ),
+    'yajra/laravel-datatables-oracle' => 
+    array (
+      'pretty_version' => 'v9.14.1',
+      'version' => '9.14.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7e45885588225b31a9e7bdf4b04733c44432531c',
     ),
   ),
 );

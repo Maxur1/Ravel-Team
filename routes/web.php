@@ -23,6 +23,16 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/import_excel', 'ImportExcelController@index');
+Route::get('/estudiante', 'EstudianteController@index');
 
-Route::post('/import_excel/import', 'ImportExcelController@import');
+Route::get('/get-all-estudiante', 'EstudianteController@getAllEstudiante');
+
+Route::get('/import-form', 'EstudianteController@importForm');
+
+Route::post('/import', 'EstudianteController@import')->name('import');
+
+Route::resource('sample', 'SampleController');
+
+Route::post('sample/update', 'SampleController@update')->name('sample.update');
+
+Route::get('sample/destroy/{id}', 'SampleController@destroy');
