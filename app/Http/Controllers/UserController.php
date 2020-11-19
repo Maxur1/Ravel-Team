@@ -51,7 +51,7 @@ class UserController extends Controller
     {
         $rules = array(
             'name'        =>  'required',
-            'correo'         =>  'required',
+            'email'         =>  'required',
             'rol'        =>  'required',
         );
 
@@ -63,9 +63,9 @@ class UserController extends Controller
         }
 
         $form_data = array(
-            'name'        =>  $request->rut,
-            'correo'         =>  $request->apellidoPaterno,
-            'rol'        =>  $request->apellidoMaterno,
+            'name'        =>  $request->name,
+            'email'         =>  $request->email,
+            'rol'        =>  $request->rol,
         );
 
         User::create($form_data);
@@ -111,7 +111,7 @@ class UserController extends Controller
     {
         $rules = array(
             'name'        =>  'required',
-            'correo'         =>  'required',
+            'email'         =>  'required',
             'rol'        =>  'required',
         );
 
@@ -123,9 +123,9 @@ class UserController extends Controller
         }
 
         $form_data = array(
-            'name'        =>  $request->rut,
-            'correo'         =>  $request->apellidoPaterno,
-            'rol'        =>  $request->apellidoMaterno,
+            'name'        =>  $request->name,
+            'email'         =>  $request->email,
+            'rol'        =>  $request->rol,
         );
 
         User::whereId($request->hidden_id)->update($form_data);
