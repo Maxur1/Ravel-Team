@@ -189,8 +189,8 @@ $(document).ready(function(){
    dataType:"json",
    success:function(data)
    {
-    $('#nombre').val(data.result.nombre);
-    $('#correo').val(data.result.correo);
+    $('#name').val(data.result.name);
+    $('#email').val(data.result.email);
     $('#rol').val(data.result.rol);
     $('#hidden_id').val(id);
     $('.modal-title').text('Editar Registro');
