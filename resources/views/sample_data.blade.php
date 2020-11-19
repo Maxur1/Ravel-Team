@@ -1,8 +1,9 @@
 
 <html>
  <head>
+ 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>How to Delete or Remove Data From Mysql in Laravel 6 using Ajax</title>
+  <title>Registro de Estudiantes</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -13,14 +14,14 @@
  <body>
   <div class="container">    
      <br />
-     <h3 align="center">How to Delete or Remove Data From Mysql in Laravel 6 using Ajax</h3>
+     <h3 align="center">Registro de Estudiantes</h3>
      <br />
-     <div align="right">
-      <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Create Record</button>
-     </div>
+     <!--<div align="right">
+      <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Crear Registro</button>
+     </div>-->
      <br />
    <div class="table-responsive">
-    <table id="estudiantes" class="table table-bordered table-striped">
+    <table id="user_table" class="table table-bordered table-striped">
      <thead>
       <tr>
        <th width="14%">Rut</th>
@@ -45,7 +46,7 @@
   <div class="modal-content">
    <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add New Record</h4>
+          <h4 class="modal-title">Añadir un nuevo registro</h4>
         </div>
         <div class="modal-body">
          <span id="form_result"></span>
@@ -57,12 +58,7 @@
              <input type="text" name="correo" id="correo" class="form-control" />
             </div>
            </div>
-           <div class="form-group">
-            <label class="control-label col-md-4">Last Name : </label>
-            <div class="col-md-8">
-             <input type="text" name="last_name" id="last_name" class="form-control" />
-            </div>
-           </div>
+           
                 <br />
                 <div class="form-group" align="center">
                  <input type="hidden" name="action" id="action" value="Add" />
@@ -80,14 +76,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h2 class="modal-title">Confirmation</h2>
+                <h2 class="modal-title">Confirmacion</h2>
             </div>
             <div class="modal-body">
-                <h4 align="center" style="margin:0;">Are you sure you want to remove this data?</h4>
+                <h4 align="center" style="margin:0;">Estas seguro que quieres eliminar este dato?</h4>
             </div>
             <div class="modal-footer">
              <button type="button" name="ok_button" id="ok_button" class="btn btn-danger">OK</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
     </div>
@@ -97,7 +93,7 @@
 <script>
 $(document).ready(function(){
 
- $('#estudiantes').DataTable({
+ $('#user_table').DataTable({
   processing: true,
   serverSide: true,
   ajax: {
@@ -180,7 +176,7 @@ $(document).ready(function(){
     {
      html = '<div class="alert alert-success">' + data.success + '</div>';
      $('#sample_form')[0].reset();
-     $('#estudiantes').DataTable().ajax.reload();
+     $('#user_table').DataTable().ajax.reload();
     }
     $('#form_result').html(html);
    }
@@ -202,9 +198,9 @@ $(document).ready(function(){
     //$('#codigoCarrera').val(data.result.codigoCarrera);
     $('#correo').val(data.result.correo);
     $('#hidden_id').val(id);
-    $('.modal-title').text('Edit Record');
-    $('#action_button').val('Edit');
-    $('#action').val('Edit');
+    $('.modal-title').text('Editar Registro');
+    $('#action_button').val('Editar');
+    $('#action').val('Editar');
     $('#formModal').modal('show');
    }
   })
@@ -212,7 +208,7 @@ $(document).ready(function(){
 
  var user_id;
 
- $(document).on('click', '.delete', function(){
+ /*$(document).on('click', '.delete', function(){
   user_id = $(this).attr('id');
   $('#confirmModal').modal('show');
  });
@@ -227,12 +223,12 @@ $(document).ready(function(){
    {
     setTimeout(function(){
      $('#confirmModal').modal('hide');
-     $('#estudiantes').DataTable().ajax.reload();
+     $('#user_table').DataTable().ajax.reload();
      alert('Data Deleted');
     }, 2000);
    }
   })
- });
+ });*/
 
 });
 </script>

@@ -21,8 +21,8 @@ class SampleController extends Controller
             $data = Estudiante::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
+                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Editar</button>';
+                        //$button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
@@ -50,11 +50,11 @@ class SampleController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'rut'    =>  'required',
+            /*'rut'    =>  'required',
             'apellidoPaterno'     =>  'required',
             'apellidoMaterno'     =>  'required',
             'nombre'     =>  'required',
-            'codigoCarrera'     =>  'required',
+            'codigoCarrera'     =>  'required',*/
             'correo'     =>  'required'
         );
 
@@ -66,11 +66,11 @@ class SampleController extends Controller
         }
 
         $form_data = array(
-            'rut'        =>  $request->rut,
+            /*'rut'        =>  $request->rut,
             'apellidoPaterno'         =>  $request->apellidoPaterno,
             'apellidoMaterno'        =>  $request->apellidoMaterno,
             'nombre'        =>  $request->nombre,
-            'codigoCarrera'        =>  $request->codigoCarrera,
+            'codigoCarrera'        =>  $request->codigoCarrera,*/
             'correo'        =>  $request->correo
         );
 
@@ -116,11 +116,11 @@ class SampleController extends Controller
     public function update(Request $request, Sample_data $sample_data)
     {
         $rules = array(
-            'rut'    =>  'required',
+            /*'rut'    =>  'required',
             'apellidoPaterno'     =>  'required',
             'apellidoMaterno'     =>  'required',
             'nombre'     =>  'required',
-            'codigoCarrera'     =>  'required',
+            'codigoCarrera'     =>  'required',*/
             'correo'     =>  'required'
         );
 
@@ -132,11 +132,11 @@ class SampleController extends Controller
         }
 
         $form_data = array(
-            'rut'        =>  $request->rut,
+            /*'rut'        =>  $request->rut,
             'apellidoPaterno'         =>  $request->apellidoPaterno,
             'apellidoMaterno'        =>  $request->apellidoMaterno,
             'nombre'        =>  $request->nombre,
-            'codigoCarrera'        =>  $request->codigoCarrera,
+            'codigoCarrera'        =>  $request->codigoCarrera,*/
             'correo'        =>  $request->correo
         );
 
