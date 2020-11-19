@@ -36,3 +36,9 @@ Route::resource('sample', 'SampleController');
 Route::post('sample/update', 'SampleController@update')->name('sample.update');
 
 Route::get('sample/destroy/{id}', 'SampleController@destroy');
+
+Route::resource('user', 'UserController');
+
+Route::post('user/update', 'UserController@update')->name('user.update');
+
+Route::get('user/destroy/{id}', 'UserController@destroy');
