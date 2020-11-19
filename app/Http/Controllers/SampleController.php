@@ -50,11 +50,11 @@ class SampleController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'rut'    =>  'required',
+            /*'rut'    =>  'required',
             'apellidoPaterno'     =>  'required',
             'apellidoMaterno'     =>  'required',
             'nombre'     =>  'required',
-            'codigoCarrera'     =>  'required',
+            'codigoCarrera'     =>  'required',*/
             'correo'     =>  'required'
         );
 
@@ -66,11 +66,11 @@ class SampleController extends Controller
         }
 
         $form_data = array(
-            'rut'        =>  $request->rut,
+            /*'rut'        =>  $request->rut,
             'apellidoPaterno'         =>  $request->apellidoPaterno,
             'apellidoMaterno'        =>  $request->apellidoMaterno,
             'nombre'        =>  $request->nombre,
-            'codigoCarrera'        =>  $request->codigoCarrera,
+            'codigoCarrera'        =>  $request->codigoCarrera,*/
             'correo'        =>  $request->correo
         );
 
@@ -116,11 +116,11 @@ class SampleController extends Controller
     public function update(Request $request, Sample_data $sample_data)
     {
         $rules = array(
-            'rut'    =>  'required',
+            /*'rut'    =>  'required',
             'apellidoPaterno'     =>  'required',
             'apellidoMaterno'     =>  'required',
             'nombre'     =>  'required',
-            'codigoCarrera'     =>  'required',
+            'codigoCarrera'     =>  'required',*/
             'correo'     =>  'required'
         );
 
@@ -132,11 +132,11 @@ class SampleController extends Controller
         }
 
         $form_data = array(
-            'rut'        =>  $request->rut,
+            /*'rut'        =>  $request->rut,
             'apellidoPaterno'         =>  $request->apellidoPaterno,
             'apellidoMaterno'        =>  $request->apellidoMaterno,
             'nombre'        =>  $request->nombre,
-            'codigoCarrera'        =>  $request->codigoCarrera,
+            'codigoCarrera'        =>  $request->codigoCarrera,*/
             'correo'        =>  $request->correo
         );
 
