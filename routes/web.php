@@ -22,3 +22,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/estudiante', 'EstudianteController@index');
+
+Route::get('/get-all-estudiante', 'EstudianteController@getAllEstudiante');
+
+Route::get('/import-form', 'EstudianteController@importForm');
+
+Route::post('/import', 'EstudianteController@import')->name('import');
+
+Route::resource('sample', 'SampleController');
+
+Route::resource('User', 'SampleControllerUser');
+
+Route::post('sample/update', 'SampleController@update')->name('sample.update');
+
+Route::get('sample/destroy/{id}', 'SampleController@destroy');
