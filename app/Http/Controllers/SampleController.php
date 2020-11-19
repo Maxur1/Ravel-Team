@@ -66,11 +66,11 @@ class SampleController extends Controller
         }
 
         $form_data = array(
-            'rut'        =>  $request->rut,
+            /*'rut'        =>  $request->rut,
             'apellidoPaterno'         =>  $request->apellidoPaterno,
             'apellidoMaterno'        =>  $request->apellidoMaterno,
             'nombre'        =>  $request->nombre,
-            'codigoCarrera'        =>  $request->codigoCarrera,
+            'codigoCarrera'        =>  $request->codigoCarrera,*/
             'correo'        =>  $request->correo
         );
 

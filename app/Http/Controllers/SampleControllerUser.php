@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use DataTables;
 use Validator;
 
-class UserController extends Controller
+class SampleControllerUser extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,14 +21,14 @@ class UserController extends Controller
             $data = User::latest()->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
-                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Editar</button>';
+                        $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Edit</button>';
                         $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="delete btn btn-danger btn-sm">Delete</button>';
                         return $button;
                     })
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('users');
+        return view('sample_data');
     }
 
     /**
@@ -50,9 +50,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'name'        =>  'required',
-            'correo'         =>  'required',
-            'rol'        =>  'required',
+            'rut'    =>  'required',
+            'apellidoPaterno'     =>  'required',
+            'apellidoMaterno'     =>  'required',
+            'nombre'     =>  'required',
+            'codigoCarrera'     =>  'required',
+            'correo'     =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -63,12 +66,15 @@ class UserController extends Controller
         }
 
         $form_data = array(
-            'name'        =>  $request->rut,
-            'correo'         =>  $request->apellidoPaterno,
-            'rol'        =>  $request->apellidoMaterno,
+            'rut'        =>  $request->rut,
+            'apellidoPaterno'         =>  $request->apellidoPaterno,
+            'apellidoMaterno'        =>  $request->apellidoMaterno,
+            'nombre'        =>  $request->nombre,
+            'codigoCarrera'        =>  $request->codigoCarrera,
+            'correo'        =>  $request->correo
         );
 
-        User::create($form_data);
+        Estudiante::create($form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
 
@@ -77,10 +83,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $sample_data
+     * @param  \App\Estudiante  $sample_data
      * @return \Illuminate\Http\Response
      */
-    public function show(User $sample_data)
+    public function show(Sample_data $sample_data)
     {
         //
     }
@@ -88,14 +94,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $sample_data
+     * @param  \App\Sample_data  $sample_data
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         if(request()->ajax())
         {
-            $data = User::findOrFail($id);
+            $data = Estudiante::findOrFail($id);
             return response()->json(['result' => $data]);
         }
     }
@@ -104,15 +110,18 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $sample_data
+     * @param  \App\Sample_data  $sample_data
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $sample_data)
+    public function update(Request $request, Sample_data $sample_data)
     {
         $rules = array(
-            'name'        =>  'required',
-            'correo'         =>  'required',
-            'rol'        =>  'required',
+            'rut'    =>  'required',
+            'apellidoPaterno'     =>  'required',
+            'apellidoMaterno'     =>  'required',
+            'nombre'     =>  'required',
+            'codigoCarrera'     =>  'required',
+            'correo'     =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -123,12 +132,15 @@ class UserController extends Controller
         }
 
         $form_data = array(
-            'name'        =>  $request->rut,
-            'correo'         =>  $request->apellidoPaterno,
-            'rol'        =>  $request->apellidoMaterno,
+            'rut'        =>  $request->rut,
+            'apellidoPaterno'         =>  $request->apellidoPaterno,
+            'apellidoMaterno'        =>  $request->apellidoMaterno,
+            'nombre'        =>  $request->nombre,
+            'codigoCarrera'        =>  $request->codigoCarrera,
+            'correo'        =>  $request->correo
         );
 
-        User::whereId($request->hidden_id)->update($form_data);
+        Estudiante::whereId($request->hidden_id)->update($form_data);
 
         return response()->json(['success' => 'Data is successfully updated']);
 
@@ -137,12 +149,14 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $sample_data
+     * @param  \App\Sample_data  $sample_data
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = User::findOrFail($id);
+        $data = Estudiante::findOrFail($id);
         $data->delete();
     }
 }
+
+

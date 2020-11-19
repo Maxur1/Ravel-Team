@@ -21,7 +21,7 @@
      </div>-->
      <br />
    <div class="table-responsive">
-    <table id="estudiantes" class="table table-bordered table-striped">
+    <table id="user_table" class="table table-bordered table-striped">
      <thead>
       <tr>
        <th width="14%">Rut</th>
@@ -93,7 +93,7 @@
 <script>
 $(document).ready(function(){
 
- $('#estudiantes').DataTable({
+ $('#user_table').DataTable({
   processing: true,
   serverSide: true,
   ajax: {
@@ -176,7 +176,7 @@ $(document).ready(function(){
     {
      html = '<div class="alert alert-success">' + data.success + '</div>';
      $('#sample_form')[0].reset();
-     $('#estudiantes').DataTable().ajax.reload();
+     $('#user_table').DataTable().ajax.reload();
     }
     $('#form_result').html(html);
    }
@@ -223,7 +223,7 @@ $(document).ready(function(){
    {
     setTimeout(function(){
      $('#confirmModal').modal('hide');
-     $('#estudiantes').DataTable().ajax.reload();
+     $('#user_table').DataTable().ajax.reload();
      alert('Data Deleted');
     }, 2000);
    }

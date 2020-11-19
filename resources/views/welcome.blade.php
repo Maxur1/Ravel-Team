@@ -69,6 +69,10 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
+                        
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}">Register</a>
+                        @endif
                     @else
                         <a href="{{ route('login') }}">Login</a>
 
@@ -81,19 +85,30 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    revisando si funciono
+                    Ravel Team
                 </div>
-
+            @guest
+            @else
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
+                @if(Auth::user()->rol == 'Jefe de Carrera')
+                <a href="http://127.0.0.1:8000/import-form">Añadir tabla excel</a>
+                <a href="http://127.0.0.1:8000/sample">Editar Correo</a>
+                @endif
+                @if(Auth::user()->rol == 'Secretario')
+                <a href="http://127.0.0.1:8000/import-form">Añadir tabla excel</a>
+                <a href="http://127.0.0.1:8000/sample">Editar Correo</a>
+                @endif  
+                @if(Auth::user()->rol == 'Administrador')
+                <a href="http://127.0.0.1:8000/user">Eliminar/Editar usuario</a>
+                @endif 
+                    <!--<a href="https://laravel-news.com">News</a>
                     <a href="https://blog.laravel.com">Blog</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>
                     <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://github.com/laravel/laravel">GitHub</a>-->
                 </div>
+                @endguest
             </div>
         </div>
     </body>
