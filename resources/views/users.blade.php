@@ -49,9 +49,23 @@
          <form method="post" id="sample_form" class="form-horizontal">
           @csrf
           <div class="form-group">
+            <label class="control-label col-md-4" >Nombre : </label>
+            <div class="col-md-8">
+             <input type="text" name="name" id="name" class="form-control" />
+            </div>
+           </div>
+
+           <div class="form-group">
             <label class="control-label col-md-4" >Correo : </label>
             <div class="col-md-8">
-             <input type="text" name="correo" id="correo" class="form-control" />
+             <input type="text" name="email" id="email" class="form-control" />
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="control-label col-md-4" >Rol : </label>
+            <div class="col-md-8">
+             <input type="text" name="rol" id="rol" class="form-control" />
             </div>
            </div>
            
@@ -97,12 +111,12 @@ $(document).ready(function(){
   },
   columns: [
    {
-    data: 'nombre',
-    name: 'nombre'
+    data: 'name',
+    name: 'name'
    },
    {
-    data: 'correo',
-    name: 'correo'
+    data: 'email',
+    name: 'email'
    },
    {
     data: 'rol',
