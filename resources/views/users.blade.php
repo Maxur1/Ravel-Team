@@ -1,9 +1,8 @@
-
 <html>
  <head>
  
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Registro de Estudiantes</title>
+  <title>Lista de Usuarios</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
@@ -14,22 +13,19 @@
  <body>
   <div class="container">    
      <br />
-     <h3 align="center">Registro de Estudiantes</h3>
+     <h3 align="center">Lista de Usuarios</h3>
      <br />
      <!--<div align="right">
       <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Crear Registro</button>
      </div>-->
      <br />
    <div class="table-responsive">
-    <table id="user_table" class="table table-bordered table-striped">
+    <table id="users" class="table table-bordered table-striped">
      <thead>
       <tr>
-       <th width="14%">Rut</th>
-                <th width="14%">Apellido Paterno</th>
-                <th width="14%">Apellido Materno</th>
-                <th width="14%">Nombre</th>
-                <th width="14%">Codigo de Carrera</th>
-                <th width="16%">Correo</th>
+       <th width="14%">Nombre</th>
+                <th width="14%">Correo</th>
+                <th width="14%">Rol</th>
                 <th width="14%">Accion</th>
       </tr>
      </thead>
@@ -53,9 +49,23 @@
          <form method="post" id="sample_form" class="form-horizontal">
           @csrf
           <div class="form-group">
+            <label class="control-label col-md-4" >Nombre : </label>
+            <div class="col-md-8">
+             <input type="text" name="name" id="name" class="form-control" />
+            </div>
+           </div>
+
+           <div class="form-group">
             <label class="control-label col-md-4" >Correo : </label>
             <div class="col-md-8">
-             <input type="text" name="correo" id="correo" class="form-control" />
+             <input type="text" name="email" id="email" class="form-control" />
+            </div>
+           </div>
+
+           <div class="form-group">
+            <label class="control-label col-md-4" >Rol : </label>
+            <div class="col-md-8">
+             <input type="text" name="rol" id="rol" class="form-control" />
             </div>
            </div>
            
@@ -93,36 +103,24 @@
 <script>
 $(document).ready(function(){
 
- $('#user_table').DataTable({
+ $('#users').DataTable({
   processing: true,
   serverSide: true,
   ajax: {
-   url: "{{ route('sample.index') }}",
+   url: "{{ route('user.index') }}",
   },
   columns: [
    {
-    data: 'rut',
-    name: 'rut'
+    data: 'name',
+    name: 'name'
    },
    {
-    data: 'apellidoPaterno',
-    name: 'apellidoPaterno'
+    data: 'email',
+    name: 'email'
    },
    {
-    data: 'apellidoMaterno',
-    name: 'apellidoMaterno'
-   },
-   {
-    data: 'nombre',
-    name: 'nombre'
-   },
-   {
-    data: 'codigoCarrera',
-    name: 'codigoCarrera'
-   },
-   {
-    data: 'correo',
-    name: 'correo'
+    data: 'rol',
+    name: 'rol'
    },
    {
     data: 'action',
@@ -147,12 +145,12 @@ $(document).ready(function(){
 
   if($('#action').val() == 'Add')
   {
-   action_url = "{{ route('sample.store') }}";
+   action_url = "{{ route('user.store') }}";
   }
 
   if($('#action').val() == 'Edit')
   {
-   action_url = "{{ route('sample.update') }}";
+   action_url = "{{ route('user.update') }}";
   }
 
   $.ajax({
@@ -176,7 +174,7 @@ $(document).ready(function(){
     {
      html = '<div class="alert alert-success">' + data.success + '</div>';
      $('#sample_form')[0].reset();
-     $('#user_table').DataTable().ajax.reload();
+     $('#users').DataTable().ajax.reload();
     }
     $('#form_result').html(html);
    }
@@ -187,16 +185,13 @@ $(document).ready(function(){
   var id = $(this).attr('id');
   $('#form_result').html('');
   $.ajax({
-   url :"/sample/"+id+"/edit",
+   url :"/user/"+id+"/edit",
    dataType:"json",
    success:function(data)
    {
-    //$('#rut').val(data.result.rut);
-    //$('#apellidoPaterno').val(data.result.apellidoPaterno);
-    //$('#apellidoMaterno').val(data.result.apellidoMaterno);
-    //$('#nombre').val(data.result.nombre);
-    //$('#codigoCarrera').val(data.result.codigoCarrera);
+    $('#nombre').val(data.result.nombre);
     $('#correo').val(data.result.correo);
+    $('#rol').val(data.result.rol);
     $('#hidden_id').val(id);
     $('.modal-title').text('Editar Registro');
     $('#action_button').val('Editar');
@@ -208,14 +203,14 @@ $(document).ready(function(){
 
  var user_id;
 
- /*$(document).on('click', '.delete', function(){
+ $(document).on('click', '.delete', function(){
   user_id = $(this).attr('id');
   $('#confirmModal').modal('show');
  });
 
  $('#ok_button').click(function(){
   $.ajax({
-   url:"sample/destroy/"+user_id,
+   url:"user/destroy/"+user_id,
    beforeSend:function(){
     $('#ok_button').text('Deleting...');
    },
@@ -223,12 +218,12 @@ $(document).ready(function(){
    {
     setTimeout(function(){
      $('#confirmModal').modal('hide');
-     $('#user_table').DataTable().ajax.reload();
+     $('#users').DataTable().ajax.reload();
      alert('Data Deleted');
     }, 2000);
    }
   })
- });*/
+ });
 
 });
 </script>

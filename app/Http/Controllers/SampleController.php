@@ -50,12 +50,12 @@ class SampleController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            /*'rut'    =>  'required',
-            'apellidoPaterno'     =>  'required',
-            'apellidoMaterno'     =>  'required',
-            'nombre'     =>  'required',
-            'codigoCarrera'     =>  'required',*/
-            'correo'     =>  'required'
+            'rut'        =>  $request->rut,
+            'apellidoPaterno'         =>  $request->apellidoPaterno,
+            'apellidoMaterno'        =>  $request->apellidoMaterno,
+            'nombre'        =>  $request->nombre,
+            'codigoCarrera'        =>  $request->codigoCarrera,
+            'correo'        =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -86,7 +86,7 @@ class SampleController extends Controller
      * @param  \App\Estudiante  $sample_data
      * @return \Illuminate\Http\Response
      */
-    public function show(Sample_data $sample_data)
+    public function show(Estudiante $sample_data)
     {
         //
     }
@@ -94,7 +94,7 @@ class SampleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Sample_data  $sample_data
+     * @param  \App\Estudiante  $sample_data
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -110,18 +110,13 @@ class SampleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Sample_data  $sample_data
+     * @param  \App\Estudiante  $sample_data
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sample_data $sample_data)
+    public function update(Request $request, Estudiante $sample_data)
     {
         $rules = array(
-            /*'rut'    =>  'required',
-            'apellidoPaterno'     =>  'required',
-            'apellidoMaterno'     =>  'required',
-            'nombre'     =>  'required',
-            'codigoCarrera'     =>  'required',*/
-            'correo'     =>  'required'
+            'correo'        =>  'required'
         );
 
         $error = Validator::make($request->all(), $rules);
@@ -132,11 +127,6 @@ class SampleController extends Controller
         }
 
         $form_data = array(
-            /*'rut'        =>  $request->rut,
-            'apellidoPaterno'         =>  $request->apellidoPaterno,
-            'apellidoMaterno'        =>  $request->apellidoMaterno,
-            'nombre'        =>  $request->nombre,
-            'codigoCarrera'        =>  $request->codigoCarrera,*/
             'correo'        =>  $request->correo
         );
 
@@ -149,7 +139,7 @@ class SampleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Sample_data  $sample_data
+     * @param  \App\Estudiante  $sample_data
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
