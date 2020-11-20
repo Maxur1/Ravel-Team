@@ -6,6 +6,8 @@ use App\Estudiante;
 use App\Imports\EstudianteImport;
 use Excel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\HeadingRowImport;
+use Validator;
 
 class EstudianteController extends Controller
 {
@@ -37,7 +39,11 @@ class EstudianteController extends Controller
 
     public function import(Request $request)
     {
+        $this->validate($request, [
+            'select_file' => 'required|file|max:1024|mimes:xls,xlsx'
+        ]);
+
         Excel::import(new EstudianteImport, $request->select_file);
-        return redirect('/get-all-estudiante');
+        return redirect('/sample'); 
     }
 }
