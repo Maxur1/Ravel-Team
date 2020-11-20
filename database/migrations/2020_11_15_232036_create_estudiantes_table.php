@@ -15,7 +15,7 @@ class CreateEstudiantesTable extends Migration
     {
         Schema::create('estudiantes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('rut');
+            $table->primary('rut');
             $table->string('apellidoPaterno');
             $table->string('apellidoMaterno');
             $table->string('nombre');
