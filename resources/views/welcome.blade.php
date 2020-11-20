@@ -69,7 +69,6 @@
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
-                        
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
                         @endif
