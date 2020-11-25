@@ -44,6 +44,6 @@ class EstudianteController extends Controller
         ]);
 
         Excel::import(new EstudianteImport, $request->select_file);
-        return redirect('/sample'); 
+        return back()-> with('success', 'Se importó el archivo exitosamente');
     }
 }
