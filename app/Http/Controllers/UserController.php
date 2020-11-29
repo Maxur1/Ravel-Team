@@ -18,7 +18,8 @@ class UserController extends Controller
     {
         if($request->ajax())
         {
-            $data = User::latest()->get();
+            
+            $data = User::latest()->where([['rol', '<>', 'administrador'],['eliminado', false]])->get();
             return DataTables::of($data)
                     ->addColumn('action', function($data){
                         $button = '<button type="button" name="edit" id="'.$data->id.'" class="edit btn btn-primary btn-sm">Editar</button>';
