@@ -37,7 +37,16 @@ class EstudianteImport implements ToModel,WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-             'Carrera' => Rule::in(['Carrera']),
+            'Rut' => 'required',
+            'Apellido Paterno' => 'required',
+            'Apellido Materno' => 'required',
+            'Nombre' => 'required',
+            'Carrera' => 'required',
+            'Correo' => 'required',
+
+            'Rut' => Rule::unique('estudiantes','rut'),
+            
+            'Carrera' => Rule::in(['Carrera']),
              
              // Can also use callback validation rules
              'Carrera' => function($attribute, $value, $onFailure) {
