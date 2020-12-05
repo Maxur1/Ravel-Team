@@ -23,10 +23,10 @@
     <table id="users" class="table table-bordered table-striped">
      <thead>
       <tr>
-       <th width="14%">Nombre</th>
-                <th width="14%">Correo</th>
-                <th width="14%">Rol</th>
-                <th width="14%">Accion</th>
+         <th width="14%">Nombre</th>
+         <th width="14%">Correo</th>
+         <th width="14%">Rol</th>
+         <th width="14%">Accion</th>
       </tr>
      </thead>
     </table>
