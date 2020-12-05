@@ -543,9 +543,11 @@ class ComposerStaticInit23b4dcb33a9074ac8d073f8e5264b66a
     );
 
     public static $classMap = array (
+        'App\\Asignatura' => __DIR__ . '/../..' . '/app/Asignatura.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Estudiante' => __DIR__ . '/../..' . '/app/Estudiante.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AsignaturasController' => __DIR__ . '/../..' . '/app/Http/Controllers/AsignaturasController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
@@ -556,7 +558,7 @@ class ComposerStaticInit23b4dcb33a9074ac8d073f8e5264b66a
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LiveSearch' => __DIR__ . '/../..' . '/app/Http/Controllers/LiveSearch.php',
         'App\\Http\\Controllers\\SampleController' => __DIR__ . '/../..' . '/app/Http/Controllers/SampleController.php',
-        'App\\Http\\Controllers\\SampleControllerUser' => __DIR__ . '/../..' . '/app/Http/Controllers/SampleControllerUser.php',
+        'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckForMaintenanceMode' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckForMaintenanceMode.php',
@@ -565,6 +567,7 @@ class ComposerStaticInit23b4dcb33a9074ac8d073f8e5264b66a
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Imports\\AsignaturasImport' => __DIR__ . '/../..' . '/app/Imports/AsignaturasImport.php',
         'App\\Imports\\EstudianteImport' => __DIR__ . '/../..' . '/app/Imports/EstudianteImport.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

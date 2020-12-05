@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <title>Importar Estudiantes</title>
+  <title>Importar Asignaturas</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -10,24 +10,24 @@
   <br />
   
   <div class="container">
-   <h3 align="center">Importar Estudiantes</h3>
+   <h3 align="center">Importar Asignaturas</h3>
     <br />
     @if(isset($errors) && $errors->any())
     <div class="alert alert-danger">
         Error al subir archivo<br><br>
-      <ul>
-        @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
+     <ul>
+      @foreach($errors->all() as $error)
+      <li>{{ $error }}</li>
+      @endforeach
+     </ul>
     </div>
-    @endif
+   @endif
 
-    @if(session()->has('failures'))
+   @if(session()->has('failures'))
     <div class="alert alert-danger">
         El archivo se subió con {{count(session()->get('failures'))}} problemas:<br>
       <ul id= "problemas" style="display:none" >
-      <br>
+      
         @foreach(session()->get('failures') as $validation)
             @foreach($validation->errors() as $error)
                 <li>{{ $error }} en la fila {{ $validation->row() }} del archivo.</li>
@@ -60,7 +60,7 @@
            <strong>{{ $message }}</strong>
    </div>
    @endif
-   <form method="post" enctype="multipart/form-data" action="{{route('import')}}">
+   <form method="post" enctype="multipart/form-data" action="{{route('importAsignaturas')}}">
     {{ csrf_field() }}
     <div class="form-group">
      <table class="table">

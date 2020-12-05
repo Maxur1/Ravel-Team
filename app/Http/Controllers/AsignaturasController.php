@@ -2,32 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Estudiante;
-use App\Imports\EstudianteImport;
+use App\Asignatura;
+use App\Imports\AsignaturasImport;
 use Excel;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\HeadingRowImport;
 use Validator;
+use Maatwesite\Excel\Validators\ValidationException;
 
-class EstudianteController extends Controller
+class AsignaturasController extends Controller
 {
     public function index()
     {   
-        return view('estudiante');
+        return view('asignatura');
     }
 
-    public function getAllEstudiante()
+    public function getAllAsignaturas()
     {
-        $estudiantes = Estudiante::all();
+        $asignaturas = Asignatura::all();
         return view('estudiantes', compact('estudiantes'));
     }
 
-    public function importForm()
+    public function importFormAsignaturas()
     {
-        return view('import-form');
+        return view('import-form-asignaturas');
     }
 
-    public function import(Request $request)
+    public function importAsignaturas(Request $request)
     {
         $this->validate($request, [
             'select_file' => 'required|file|max:1024|mimes:xls,xlsx'
@@ -35,9 +36,10 @@ class EstudianteController extends Controller
 
         $file = $request->file('select_file');
 
-        $import = new EstudianteImport;
+        $import = new AsignaturasImport;
 
         $import->import($file);
+
 
         if($import->failures()->isNotEmpty())
         {
