@@ -31,6 +31,10 @@ Route::get('/import-form', 'EstudianteController@importForm');
 
 Route::post('/import', 'EstudianteController@import')->name('import');
 
+Route::get('/import-form-asignaturas', 'AsignaturasController@importFormAsignaturas');
+
+Route::post('/importAsignaturas', 'AsignaturasController@importAsignaturas')->name('importAsignaturas');
+
 Route::resource('sample', 'SampleController');
 
 Route::resource('User', 'SampleControllerUser');
