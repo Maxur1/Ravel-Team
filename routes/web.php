@@ -48,3 +48,11 @@ Route::resource('user', 'UserController');
 Route::post('user/update', 'UserController@update')->name('user.update');
 
 Route::get('user/destroy/{id}', 'UserController@destroy');
+
+Route::get('situation-report', 'EstudianteController@index');
+
+Route::post('/report', 'UserController@report')->name('report');
+
+Route::get('autocomplete', 'EstudianteController@autocomplete')->name('autocomplete');
+
+Route::post('/situation-report/fetch', 'EstudianteController@fetch')->name('autocomplete.fetch');

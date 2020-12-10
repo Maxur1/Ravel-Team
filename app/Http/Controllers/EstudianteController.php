@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Estudiante;
+use App\Asignatura;
 use App\Imports\EstudianteImport;
 use Excel;
 use Illuminate\Http\Request;
@@ -12,8 +13,18 @@ use Validator;
 class EstudianteController extends Controller
 {
     public function index()
-    {   
-        return view('estudiante');
+    {
+        $asignaturas = Asignatura::all();
+        return view('situation-report')->with('asignaturas',$asignaturas);
+    }
+
+    public function edit($id)
+    {
+        if(request()->ajax())
+        {
+            $data = Estudiante::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     public function getAllEstudiante()
@@ -47,5 +58,21 @@ class EstudianteController extends Controller
         {
             return back()-> with('success', 'Se importó el archivo exitosamente');
         }
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $search = $request->get('term');
+
+        $reemplazos = array(
+            '-'             => '',
+            '.'             => ''
+        );
+
+        $search = strtr( $search , $reemplazos);
+      
+        $result = Estudiante::where('nombre', 'LIKE', '%'. $search. '%')->orWhere('rut', 'LIKE', '%'. $search. '%')->get();
+
+        return response()->json($result);
     }
 }
