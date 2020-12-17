@@ -8,11 +8,7 @@
         <br />
         <h3 align="center">Lista de Usuarios</h3>
         <br />
-        <!--<div align="right">
-        <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Crear Registro</button>
-        </div>-->
-        <br />
-        <div class="table-responsive">
+        <div class="table-responsive" >
             <table id="users" class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -23,8 +19,8 @@
             </tr>
             </thead>
             </table>
+            <br>
         </div>
-        <br />
         <br />
     </div>
     
@@ -92,6 +88,11 @@
 @endguest
 @endsection
 @section('scripts')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
 <script>
 $(document).ready(function(){
 
@@ -122,23 +123,9 @@ $(document).ready(function(){
   ]
  });
 
- $('#create_record').click(function(){
-  $('.modal-title').text('Add New Record');
-  $('#action_button').val('Add');
-  $('#action').val('Add');
-  $('#form_result').html('');
-
-  $('#formModal').modal('show');
- });
-
  $('#sample_form').on('submit', function(event){
   event.preventDefault();
   var action_url = '';
-
-  if($('#action').val() == 'Add')
-  {
-   action_url = "{{ route('user.store') }}";
-  }
 
   if($('#action').val() == 'Edit')
   {
