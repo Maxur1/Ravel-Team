@@ -1,4 +1,4 @@
-
+@extends('layouts.app')
 <html>
  <head>
  

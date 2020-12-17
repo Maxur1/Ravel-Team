@@ -13,11 +13,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
  </head>
  <style>
-    .form-control
-    {
-        
-    }
- 
+    .search{
+        background-color: #fff;
+        }
+    
+    textarea {
+        resize: none;
+        }
+
  </style>
  <body> 
   <div class="container">
@@ -29,16 +32,15 @@
         <div id="custom-search-input">
             <div width="40%" align="left" class="input-group">
                 <label>Estudiante</label>
-                <input type="text" name="search" id="search" class="form-control" placeholder="Ingrese nombre o rut del estudiante" />
-                <div id="countryList">
+                <input type="text" name="search" id="search" class="form-control" placeholder="Ingrese nombre o rut del estudiante" required />
+                <div id="countryList" name="countryList">
                 </div>
-            </div>
-            
+            </div>    
         </div>
         <br>
         <div align="left">
             <label>Descripción de la situación</label>
-            <input type="textarea" name="situacion" class="form-control"/>
+            <textarea name="situacion" class="form-control" rows="3"></textarea>
         </div>
         <br>
         <div width="40%" align="left" class="input-group">
