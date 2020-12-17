@@ -8,14 +8,19 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
+use Maatwebsite\Excel\Validators\Failure;
+use Maatwebsite\Excel\Concerns\SkipsOnError;
+use Maatwebsite\Excel\Concerns\SkipsOnFailure;
+use Maatwebsite\Excel\Concerns\SkipsErrors;
+use Maatwebsite\Excel\Concerns\SkipsFailures;
 
 use Maatwebsite\Excel\Imports\HeadingRowFormatter;
 
 HeadingRowFormatter::default('none');
 
-class EstudianteImport implements ToModel,WithHeadingRow, WithValidation
+class EstudianteImport implements ToModel,WithHeadingRow, WithValidation,SkipsOnError,SkipsOnFailure
 {
-    use Importable;
+    use Importable,SkipsErrors,SkipsFailures;
 
     public function model(array $row)
     {
@@ -37,14 +42,14 @@ class EstudianteImport implements ToModel,WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-             'Carrera' => Rule::in(['Carrera']),
-             
-             // Can also use callback validation rules
-             'Carrera' => function($attribute, $value, $onFailure) {
-                  if (!is_integer($value)) {
-                    $onFailure(': codigo Carrera no es un entero.');
-                  }
-              }
+            'Rut' => ['required','unique:estudiantes,rut'],
+            'Apellido Paterno' => 'required',
+            'Apellido Materno' => 'required',
+            'Nombre' => 'required',
+            'Carrera' => 'required|integer',
+            'Correo' => 'required|nullable|email',
         ];
     }
+
+
 }
