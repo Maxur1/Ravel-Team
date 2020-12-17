@@ -53,6 +53,10 @@ Route::get('situation-report', 'EstudianteController@index');
 
 Route::post('/report', 'UserController@report')->name('report');
 
+Route::get('attention-register', 'EstudianteController@attention');
+
+Route::post('/register', 'UserController@register')->name('register');
+
 Route::get('autocomplete', 'EstudianteController@autocomplete')->name('autocomplete');
 
 Route::post('/situation-report/fetch', 'EstudianteController@fetch')->name('autocomplete.fetch');

@@ -18,6 +18,11 @@ class EstudianteController extends Controller
         return view('situation-report')->with('asignaturas',$asignaturas);
     }
 
+    public function attention()
+    {
+        return view('attention-register');
+    }
+
     public function edit($id)
     {
         if(request()->ajax())
