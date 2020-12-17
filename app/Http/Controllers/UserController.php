@@ -146,4 +146,20 @@ class UserController extends Controller
         $data = User::findOrFail($id);
         $data->delete();
     }
+
+    public function situationReport()
+    {
+        return view('situation-report');
+    }
+
+    public function report(Request $request)
+    {
+
+    }
+
+    public function register(Request $request)
+    {
+        $data = $request->request;
+        dd($request);
+    }
 }
