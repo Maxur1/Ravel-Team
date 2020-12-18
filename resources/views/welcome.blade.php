@@ -71,6 +71,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.index') }}">Administrar usuarios<span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.index') }}">Administrar usuarios<span class="sr-only">(current)</span></a>
+                    </li>
                     @endif
 
                     <!-- CERRAR SESIÓN -->

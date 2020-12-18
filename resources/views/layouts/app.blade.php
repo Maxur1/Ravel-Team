@@ -14,6 +14,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    @yield('head')
     <!-- Scripts -->
     <!-- <script src="{{ asset('js/app.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -53,7 +54,7 @@
 
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #23415B">
             <!-- Logo UCN -->
-            <a class="navbar-brand" href="{{ url('/')}}">
+            <a class="navbar-brand">
                 <img src="\img\Isologo-UCN-2018.png" height="40px" alt="Logo-UCN" loading="lazy">
             </a>
 
@@ -79,29 +80,47 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.index') }}">Administrar usuarios<span class="sr-only">(current)</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register') }}">Registrar usuarios</a>
+                    </li>
+                    <!-- Si el usuario es un Jefe de Carrera... -->
+                    @elseif(Auth::user()->rol === 'Jefe de Carrera')
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/import-form">Añadir Estudiantes<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/sample">Editar Correo Estudiantes<span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- Si el usuario es un Secretaria... -->
+                    @elseif(Auth::user()->rol === 'Secretario')
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/import-form">Añadir Estudiantes<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/sample">Editar Correo Estudiantes<span class="sr-only">(current)</span></a>
+                    </li>
+                    <!-- Si el usuario es un Profesor... -->
+                    @elseif(Auth::user()->rol === 'Profesor')
+
                     @endif
 
                     <!-- CERRAR SESIÓN -->
-                    <div class="dropdown">
-                        <button style="color: rgba(255,255,255,.75)" class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </button>
-                        
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <!-- El botón activa el formulario que detona el logout -->                            
-                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                Salir
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        </div>
-                    </div>
+                    <li class="nav-item">
+                        <a class="nav-link">{{ Auth::user()->name }}</a>
+                    </li>   
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
+                    </li>   
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+
                     @endguest
 
             </div>
         </nav>
+
         <!-- Para mostrar los mensajes de errores -->
         <div style="margin-top:20px">
             @if(session('info'))
@@ -157,12 +176,12 @@
         <!-- Copyright -->
     </footer>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script> src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>    
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>    
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>  
     @yield('scripts')
 </body>
 
