@@ -154,7 +154,7 @@ class UserController extends Controller
 
     public function report(Request $request)
     {
-
+        dd($request);
     }
 
     public function register(Request $request)

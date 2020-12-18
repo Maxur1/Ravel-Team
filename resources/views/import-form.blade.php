@@ -1,12 +1,16 @@
-<!DOCTYPE html>
-<html>
- <head>
-  <title>Importar Estudiantes</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </head>
- <body>
+@extends('layouts.app')
+@section('head')
+    <script> src="{{ asset('js/app.js') }}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> 
+@endsection
+@section('content')
+@guest
+<meta http-equiv="refresh" content="1; URL={{ route('login') }}" />
+@else
   <br />
   
   <div class="container">
@@ -67,7 +71,7 @@
       <tr>
        <td width="40%" align="right"><label>Ingrese el archivo Excel</label></td>
        <td width="30">
-        <input type="file" name="select_file" class="form-control" />
+        <input type="file" name="select_file" />
        </td>
        <td width="30%" align="left">
         <input type="submit" name="upload" class="btn btn-primary" value="Subir">
@@ -81,6 +85,7 @@
      </table>
     </div>
    </form>
- 
- </body>
-</html>
+@endguest
+@endsection
+@section('scripts')
+@endsection
