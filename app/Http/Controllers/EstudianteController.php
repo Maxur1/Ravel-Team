@@ -3,25 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Estudiante;
+use App\Asignatura;
 use App\Imports\EstudianteImport;
 use Excel;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\HeadingRowImport;
+use Validator;
 
 class EstudianteController extends Controller
 {
     public function index()
-    {   
-        return view('estudiante');
+    {
+        $asignaturas = Asignatura::all();
+        return view('situation-report')->with('asignaturas',$asignaturas);
     }
 
-    public function addEstudiante()
+    public function attention()
     {
-        $estudiantes = [
-            ["rut" => "1234","paterno" => "perez","materno" => "lopez","nombre" => "juan","carrera" => "0001","correo" => "juan@ucn.cl"]
+        return view('attention-register');
+    }
 
-        ];
-        Estudiante::insert($estudiantes);
-        return "Se han agregado estudiantes exitosamente";
+    public function edit($id)
+    {
+        if(request()->ajax())
+        {
+            $data = Estudiante::findOrFail($id);
+            return response()->json(['result' => $data]);
+        }
     }
 
     public function getAllEstudiante()
@@ -37,7 +45,39 @@ class EstudianteController extends Controller
 
     public function import(Request $request)
     {
-        Excel::import(new EstudianteImport, $request->select_file);
-        return redirect('/get-all-estudiante');
+        $this->validate($request, [
+            'select_file' => 'required|file|max:1024|mimes:xls,xlsx'
+        ]);
+
+        $file = $request->file('select_file');
+
+        $import = new EstudianteImport;
+
+        $import->import($file);
+
+        if($import->failures()->isNotEmpty())
+        {
+            return back()->withFailures($import->failures());
+        }
+        else
+        {
+            return back()-> with('success', 'Se importó el archivo exitosamente');
+        }
+    }
+
+    public function autocomplete(Request $request)
+    {
+        $search = $request->get('term');
+
+        $reemplazos = array(
+            '-'             => '',
+            '.'             => ''
+        );
+
+        $search = strtr( $search , $reemplazos);
+      
+        $result = Estudiante::where('nombre', 'LIKE', '%'. $search. '%')->orWhere('rut', 'LIKE', '%'. $search. '%')->get();
+
+        return response()->json($result);
     }
 }
