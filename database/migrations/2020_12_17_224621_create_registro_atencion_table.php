@@ -18,8 +18,8 @@ class CreateRegistroAtencionTable extends Migration
             $table->string('estudiante_atendido')->unique();
             $table->string('descripcion');
             $table->string('medio_atencion');
-            $table->string('asignatura');
-            $table->string('profesor');
+            $table->string('asignatura')->nullable();
+            $table->string('profesor')->nullable();
             $table->timestamps();
         });
     }

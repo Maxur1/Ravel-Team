@@ -159,6 +159,6 @@ class UserController extends Controller
 
     public function registerAttention(Request $request)
     {
-        $data = $request->request;
+         $data = $request->request;
     }
 }

@@ -55,7 +55,7 @@ Route::post('/report', 'UserController@report')->name('report');
 
 Route::get('attention-register', 'EstudianteController@attention');
 
-Route::post('/registerAttention', 'UserController@registerAttention')->name('registerAttention');
+Route::post('/registerAttention', 'AttentionController@register')->name('register');
 
 Route::get('autocomplete', 'EstudianteController@autocomplete')->name('autocomplete');
 
