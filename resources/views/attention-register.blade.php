@@ -23,7 +23,7 @@
   <div class="container">
    <h3 align="center">Registrar Atención</h3>
     <br />
-   <form method="post" enctype="multipart/form-data" action="{{route('register')}}">
+   <form method="post" enctype="multipart/form-data" action="{{route('registerAttention')}}">
     {{ csrf_field() }}
     <div class="form-group">
         <div id="custom-search-input">

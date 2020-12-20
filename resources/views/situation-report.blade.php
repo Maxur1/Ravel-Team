@@ -55,7 +55,7 @@
         <div width="40%" align="left" class="input-group" id="asignatura" style="display:none">
             <label>Asignatura</label>
             <br>
-            <select id= "select-asignatura" name="select-asignatura" class="form-control">
+            <select id= "select_asignatura" name="select_asignatura" class="form-control">
                 @foreach($asignaturas as $asignatura)
                     <option value="{{$asignatura->nrcAsignaturas}}">{{$asignatura->nrcAsignaturas}} - {{$asignatura->nomAsignaturas}}</option>
                 @endforeach

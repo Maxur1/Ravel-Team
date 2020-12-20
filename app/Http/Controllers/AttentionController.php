@@ -9,7 +9,18 @@ use Validator;
 
 class AttentionController extends Controller
 {
-    public function register(Request $request)
+
+        /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('attention-register');
+    }
+
+    public function registerAttention(Request $request)
     {
         /* 
         $rules = array(
@@ -34,6 +45,7 @@ class AttentionController extends Controller
         Attention::create($form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
+        //return back()->with('info','Data Added successfully.');
 
     }
 }
