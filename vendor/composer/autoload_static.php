@@ -544,10 +544,12 @@ class ComposerStaticInit23b4dcb33a9074ac8d073f8e5264b66a
 
     public static $classMap = array (
         'App\\Asignatura' => __DIR__ . '/../..' . '/app/Asignatura.php',
+        'App\\Attention' => __DIR__ . '/../..' . '/app/Attention.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Estudiante' => __DIR__ . '/../..' . '/app/Estudiante.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AsignaturasController' => __DIR__ . '/../..' . '/app/Http/Controllers/AsignaturasController.php',
+        'App\\Http\\Controllers\\AttentionController' => __DIR__ . '/../..' . '/app/Http/Controllers/AttentionController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
