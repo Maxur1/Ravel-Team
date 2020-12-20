@@ -40,7 +40,7 @@
         <br>
         <div align="left">
             <label>Descripción de la situación</label>
-            <textarea name="situacion" class="form-control" rows="3"></textarea>
+            <textarea name="situacion" class="form-control" rows="20"></textarea>
         </div>
         <br>
         <div width="40%" align="left" class="input-group">

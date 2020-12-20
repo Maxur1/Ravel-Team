@@ -151,14 +151,4 @@ class UserController extends Controller
     {
         return view('situation-report');
     }
-
-    public function report(Request $request)
-    {
-        $data = $request->request;
-    }
-
-    public function registerAttention(Request $request)
-    {
-         $data = $request->request;
-    }
 }

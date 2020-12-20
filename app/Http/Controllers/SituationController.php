@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Situation;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Asignatura;
 use Validator;
 
 class SituationController extends Controller
@@ -16,7 +17,8 @@ class SituationController extends Controller
      */
     public function index()
     {
-        //
+        $asignaturas = Asignatura::all();
+        return view('situation-report')->with('asignaturas',$asignaturas);
     }
 
     /**

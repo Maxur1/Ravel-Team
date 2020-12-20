@@ -38,7 +38,7 @@
         <br>
         <div align="left">
             <label>Descripción de la atención</label>
-            <input type="textarea" name="situacion" class="form-control"/>
+            <textarea name="situacion" class="form-control" rows="20"></textarea>
         </div>
         <br>
         <div width="40%" align="left" class="input-group">
