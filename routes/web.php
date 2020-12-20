@@ -49,9 +49,13 @@ Route::post('user/update', 'UserController@update')->name('user.update');
 
 Route::get('user/destroy/{id}', 'UserController@destroy');
 
-Route::get('situation-report', 'EstudianteController@index');
+Route::get('situation-report', 'SituationController@index');
 
-Route::post('/report', 'UserController@report')->name('report');
+Route::post('/report', 'SituationController@report')->name('report');
+
+Route::get('attention-register', 'AttentionController@index');
+
+Route::post('/registerAttention', 'AttentionController@registerAttention')->name('registerAttention');
 
 Route::get('autocomplete', 'EstudianteController@autocomplete')->name('autocomplete');
 
