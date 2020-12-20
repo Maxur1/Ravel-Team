@@ -1,42 +1,43 @@
-<html>
- <head>
- 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lista de Usuarios</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-  <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
- </head>
- <body>
+@extends('layouts.app')
+@section('head')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+@endsection
+@section('content')
+@guest
+<meta http-equiv="refresh" content="1; URL={{ route('login') }}" />
+@else
+<style>
+    .table_responsive
+    {
+        
+    }
+</style>
   <div class="container">    
-     <br />
-     <h3 align="center">Lista de Usuarios</h3>
-     <br />
-     <!--<div align="right">
-      <button type="button" name="create_record" id="create_record" class="btn btn-success btn-sm">Crear Registro</button>
-     </div>-->
-     <br />
-   <div class="table-responsive">
-    <table id="users" class="table table-bordered table-striped">
-     <thead>
-      <tr>
-         <th width="14%">Nombre</th>
-         <th width="14%">Correo</th>
-         <th width="14%">Rol</th>
-         <th width="14%">Accion</th>
-      </tr>
-     </thead>
-    </table>
-   </div>
-   <br />
-   <br />
-  </div>
- </body>
-</html>
-
+        <br />
+        <h3 align="center">Lista de Usuarios</h3>
+        <br />
+        <div class="table-responsive" >
+            <table id="users" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th width="14%">Nombre</th>
+                <th width="14%">Correo</th>
+                <th width="14%">Rol</th>
+                <th width="14%">Accion</th>
+            </tr>
+            </thead>
+            </table>
+            <br>
+        </div>
+        <br />
+    </div>
+    
+   
 <div id="formModal" class="modal fade" role="dialog">
  <div class="modal-dialog">
   <div class="modal-content">
@@ -47,7 +48,6 @@
         <div class="modal-body">
          <span id="form_result"></span>
          <form method="post" id="sample_form" class="form-horizontal">
-          @csrf
           <div class="form-group">
             <label class="control-label col-md-4" >Nombre : </label>
             <div class="col-md-8">
@@ -98,7 +98,9 @@
         </div>
     </div>
 </div>
-
+@endguest
+@endsection
+@section('scripts')
 
 <script>
 $(document).ready(function(){
@@ -130,23 +132,9 @@ $(document).ready(function(){
   ]
  });
 
- $('#create_record').click(function(){
-  $('.modal-title').text('Add New Record');
-  $('#action_button').val('Add');
-  $('#action').val('Add');
-  $('#form_result').html('');
-
-  $('#formModal').modal('show');
- });
-
  $('#sample_form').on('submit', function(event){
   event.preventDefault();
   var action_url = '';
-
-  if($('#action').val() == 'Add')
-  {
-   action_url = "{{ route('user.store') }}";
-  }
 
   if($('#action').val() == 'Edit')
   {
@@ -227,6 +215,6 @@ $(document).ready(function(){
 
 });
 </script>
-
+@endsection
 
 
