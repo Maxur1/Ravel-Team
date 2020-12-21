@@ -20,6 +20,7 @@ class CreateRegistroAtencionTable extends Migration
             $table->string('medio_atencion');
             $table->string('asignatura')->nullable();
             $table->string('profesor')->nullable();
+            $table->string('fecha');
             $table->timestamps();
         });
     }

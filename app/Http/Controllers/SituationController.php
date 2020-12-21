@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Situation;
 use App\Asignatura;
+use App\User;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use App\Mail\SituationMail;
+use App\Notifications\SituationNotification;
+
+use Illuminate\Support\Facades\Mail;
 
 class SituationController extends Controller
 {
@@ -48,9 +55,16 @@ class SituationController extends Controller
      * @param  \App\Situation  $situation
      * @return \Illuminate\Http\Response
      */
-    public function show(Situation $situation)
+
+    public function show($fecha)
     {
-        //
+        $situaciones = Situation::all()->where('fecha','=',$fecha);
+        
+        foreach ($situaciones as $situation)
+        {
+            $sit = $situation;
+        }
+        return view('situation.show', compact('sit'));
     }
 
     /**
@@ -95,9 +109,28 @@ class SituationController extends Controller
                 'descripcion'         =>  $request->situacion,
                 'medio_atencion'        =>  $request->tipo,
                 'asignatura'    => $request->select_asignatura,
+                'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
             );
     
-            Situation::create($form_data);
+            $situation = Situation::create($form_data);
+
+            $profesor = Auth::user();
+
+            // Enviar notificación email a los profesores
+
+            $jefes = User::all()->where('rol','=','Jefe de Carrera');
+            // Por cada profesor guía enviar un email
+            foreach ($jefes as $jefe) {
+                $destinatario_email = $jefe->email;
+                // $destinario_nombre = $profesor->name;
+                
+                // Enviar email
+                Mail::to($destinatario_email)->send(new SituationMail($situation, $profesor->name));
+
+                // Enviar notificación por plataforma
+                $jefe->notify(new SituationNotification($situation, $profesor->email));
+            }
+            
     
             return back()->with('success','Se registro la situación');
        
