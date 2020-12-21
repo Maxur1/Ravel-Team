@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Attention;
 use Validator;
+use App\Asignatura;
+use App\User;
 
 class AttentionController extends Controller
 {
@@ -17,7 +19,9 @@ class AttentionController extends Controller
      */
     public function index()
     {
-        return view('attention-register');
+        $asignaturas = Asignatura::all();
+        $profesores = User::all()->where('rol','=','Profesor');
+        return view('attention-register')->with('asignaturas',$asignaturas)->with('profesores',$profesores);
     }
 
     public function registerAttention(Request $request)
@@ -40,12 +44,15 @@ class AttentionController extends Controller
             'estudiante_atendido'        =>  $request->search,
             'descripcion'         =>  $request->situacion,
             'medio_atencion'        =>  $request->tipo,
+            'asignatura'         =>  $request->select_asignatura,
+            'profesor'        =>  $request->profesor2,
         );
 
         Attention::create($form_data);
 
-        return response()->json(['success' => 'Data Added successfully.']);
-        //return back()->with('info','Data Added successfully.');
+        //return response()->json(['success' => 'Data Added successfully.']);
+        
+        return back()->with('success','Se registro la atención');
 
     }
 }

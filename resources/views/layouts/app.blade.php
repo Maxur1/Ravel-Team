@@ -12,7 +12,7 @@
     <title>{{ config('app.name', 'UCN - Fichas de atención personal de los estudiantes DISC') }}</title>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-bootstrap/0.5pre/css/custom-theme/jquery-ui-1.10.0.custom.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous"> -->
 
     @yield('head')
     <!-- Scripts -->
@@ -21,7 +21,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> -->
     <!-- Styles -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
     <style>
         body {
@@ -63,9 +62,7 @@
                 <ul class="nav navbar-nav ml-auto">
                     <!-- Links de autenticación -->
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Ingresar</a>
-                    </li>
+                    
                     @else
 
                     <!-- Home -->
@@ -89,7 +86,13 @@
                         <a class="nav-link" href="http://127.0.0.1:8000/import-form">Añadir Estudiantes<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/import-form-asignaturas">Añadir Asignaturas<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:8000/sample">Editar Correo Estudiantes<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/attention-register">Registrar Atención<span class="sr-only">(current)</span></a>
                     </li>
                     <!-- Si el usuario es un Secretaria... -->
                     @elseif(Auth::user()->rol === 'Secretario')
@@ -97,10 +100,17 @@
                         <a class="nav-link" href="http://127.0.0.1:8000/import-form">Añadir Estudiantes<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/import-form-asignaturas">Añadir Asignaturas<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:8000/sample">Editar Correo Estudiantes<span class="sr-only">(current)</span></a>
                     </li>
                     <!-- Si el usuario es un Profesor... -->
                     @elseif(Auth::user()->rol === 'Profesor')
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/situation-report">Reportar Situación<span class="sr-only">(current)</span></a>
+                    </li>
 
                     @endif
 
@@ -180,7 +190,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>  
     @yield('scripts')
 </body>
