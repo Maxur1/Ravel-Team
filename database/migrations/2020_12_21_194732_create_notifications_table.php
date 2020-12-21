@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSampleDatasTable extends Migration
+class CreateNotificationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class CreateSampleDatasTable extends Migration
      */
     public function up()
     {
-        Schema::create('sample_datas', function (Blueprint $table) {
+        Schema::create('notifications', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateSampleDatasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sample_datas');
+        Schema::dropIfExists('notifications');
     }
 }

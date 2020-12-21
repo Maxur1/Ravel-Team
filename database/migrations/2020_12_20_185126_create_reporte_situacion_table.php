@@ -19,6 +19,7 @@ class CreateReporteSituacionTable extends Migration
             $table->string('descripcion');
             $table->string('medio_atencion');
             $table->string('asignatura')->nullable();
+            $table->string('fecha');
             $table->timestamps();
         });
     }

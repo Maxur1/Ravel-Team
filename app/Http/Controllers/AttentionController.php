@@ -8,6 +8,8 @@ use App\Attention;
 use Validator;
 use App\Asignatura;
 use App\User;
+use App\Estudiante;
+use Carbon\Carbon;
 
 class AttentionController extends Controller
 {
@@ -26,33 +28,57 @@ class AttentionController extends Controller
 
     public function registerAttention(Request $request)
     {
-        /* 
-        $rules = array(
-            'estudiante_atendido'        =>  'required',
-            'descripcion'         =>  'required',
-            'medio_atencion'        =>  'required',
+        /*
+        $search1 = $request->search;
+
+        $reemplazos = array(
+            '-'             => '',
+            '.'             => ''
         );
 
-        $error = Validator::make($request->all(), $rules);
+        $search1 = strtr( $search1 , $reemplazos);
 
-        if($error->fails())
+        $palabras = explode (" ", $search1);
+
+        if(Estudiante::where('nombre', '==', $search1))
         {
-            return response()->json(['errors' => $error->errors()->all()]);
+            return back()->with('error','Nombre de Alumno incorrecto');
+        }
+        else
+        {
+            if(Estudiante::where([['nombre', '=', '%'. $palabras[0]. '%'],['apellidoPaterno', '=', '%'. $palabras[1]. '%'],['apellidoMaterno', '=', '%'. $palabras[2]. '%']]))
+            {
+                $form_data = array(
+                    'estudiante_atendido'        =>  $request->search,
+                    'descripcion'         =>  $request->situacion,
+                    'medio_atencion'        =>  $request->tipo,
+                    'asignatura'         =>  $request->select_asignatura,
+                    'profesor'        =>  $request->profesor2,
+                    'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
+                );
+        
+                Attention::create($form_data);
+                
+                return back()->with('success','Se registro la atención');
+            }
+            else
+            {
+                return back()->with('error','El estudiante no existe en la base de datos');
+            }
         }
         */
+        
         $form_data = array(
             'estudiante_atendido'        =>  $request->search,
             'descripcion'         =>  $request->situacion,
             'medio_atencion'        =>  $request->tipo,
             'asignatura'         =>  $request->select_asignatura,
             'profesor'        =>  $request->profesor2,
+            'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
         );
 
         Attention::create($form_data);
-
-        //return response()->json(['success' => 'Data Added successfully.']);
         
         return back()->with('success','Se registro la atención');
-
     }
 }

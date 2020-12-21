@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Situation;
 use App\Asignatura;
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
+use App\Mail\SituationMail;
+use App\Notifications\SituationNotification;
+
+use Illuminate\Support\Facades\Mail;
 
 class SituationController extends Controller
 {
@@ -48,9 +53,11 @@ class SituationController extends Controller
      * @param  \App\Situation  $situation
      * @return \Illuminate\Http\Response
      */
-    public function show(Situation $situation)
+
+    public function show($id)
     {
-        //
+        $situaciones = Situation::find($id);
+        return view('situation.show', compact('situaciones'));
     }
 
     /**
@@ -95,9 +102,30 @@ class SituationController extends Controller
                 'descripcion'         =>  $request->situacion,
                 'medio_atencion'        =>  $request->tipo,
                 'asignatura'    => $request->select_asignatura,
+                'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
             );
     
             Situation::create($form_data);
+
+            /* Enviar notificación email a los profesores
+
+            // Obtengo la id del trabajo al que está relacionado el avance
+            $trabajo_id = $request->idTrabajo;
+            // Buscar a los profesores relacionados al trabajo
+            $trabajo = Trabajo::findOrFail($trabajo_id);
+            $profesores = $trabajo->profesores;
+            // Por cada profesor guía enviar un email
+            foreach ($profesores as $profesor) {
+                $destinatario_email = $profesor->email;
+                // $destinario_nombre = $profesor->name;
+
+                // Enviar email
+                Mail::to($destinatario_email)->send(new AvanceRegistrado($trabajo, $profesor, $avance));
+
+                // Enviar notificación por plataforma
+                $profesor->notify(new AvanceRegistradoNotif($trabajo, $alumno, $avance));
+            }
+            */
     
             return back()->with('success','Se registro la situación');
        
