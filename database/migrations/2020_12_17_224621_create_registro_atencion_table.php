@@ -15,11 +15,12 @@ class CreateRegistroAtencionTable extends Migration
     {
         Schema::create('registro_atencion', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('estudiante_atendido')->unique();
+            $table->string('estudiante_atendido');
             $table->string('descripcion');
             $table->string('medio_atencion');
             $table->string('asignatura')->nullable();
             $table->string('profesor')->nullable();
+            $table->string('fecha');
             $table->timestamps();
         });
     }

@@ -15,10 +15,11 @@ class CreateReporteSituacionTable extends Migration
     {
         Schema::create('reporte_situacion', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('estudiante_reportado')->unique();
+            $table->string('estudiante_reportado');
             $table->string('descripcion');
             $table->string('medio_atencion');
             $table->string('asignatura')->nullable();
+            $table->string('fecha');
             $table->timestamps();
         });
     }
