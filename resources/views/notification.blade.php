@@ -26,17 +26,11 @@
                         <tbody id="tablaTrabajos" class="table-hover">
                             <?php $cant=0; ?>
                             @foreach(Auth::user()->unreadNotifications  as $notification)
-                                @if( $notification->data["tipo"] == "Avance" )
+                               
                                     <tr>
-                                        <a onclick="markRead('{{ $notification->id }}')" style="vertical-align: middle" href="{{route('avance.show', $notification->data['avance']['id'])}}"> 
-                                        <p>{{$notification->data["user"]["name"]}} subio un nuevo avance en el trabajo (<b>{{ $notification->data["trabajo"]["nombreTrabajo"] }}</b>)</p></a>
+                                        <a onclick="markRead('{{ $notification->id }}')" style="vertical-align: middle" href="{{route('situation.show', $notification->data['fecha'])}}"> 
+                                        <p>{{$notification->data["profesor"]}} reporto una nueva situación</p></a>
                                     </tr>
-                                @else
-                                    <tr>
-                                        <a onclick="markRead('{{ $notification->id }}')" style="vertical-align: middle" href="{{route('avance.show', $notification->data['avance']['id'])}}">
-                                        <p>{{$notification->data["user"]["name"]}} Comento tu avance en el trabajo (<b>{{ $notification->data["trabajo"]["nombreTrabajo"] }}</b>)</p></a>
-                                    </tr>  
-                                @endif
                                 <?php $cant++; ?>                                                             
                             @endforeach
                             @if($cant === 0)

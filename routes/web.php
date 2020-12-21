@@ -67,5 +67,7 @@ Route::post('/situation-report/fetch', 'EstudianteController@fetch')->name('auto
 
 Route::resource('/notification', 'NotificationController');
 
+Route::resource('/situation', 'SituationController');
+
 Route::post('/notification/cantidad', 'NotificationController@cantidad')->name('notificacion.cantidad');
 Route::post('/notification/marcarLeidos', 'NotificationController@marcarLeidos')->name('notificacion.marcarLeidos');

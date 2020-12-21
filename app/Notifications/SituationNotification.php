@@ -14,7 +14,7 @@ class SituationNotification extends Notification
 {
     use Queueable;
 
-    protected $usuario;
+    protected $profesor;
     protected $situacion;
 
     /**
@@ -22,9 +22,9 @@ class SituationNotification extends Notification
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Situation $situacion, $profesor)
     {
-        $this->usuario = $usuario;
+        $this->profesor = $profesor;
         $this->situacion = $situacion;
     }
 
@@ -36,7 +36,7 @@ class SituationNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -69,8 +69,9 @@ class SituationNotification extends Notification
     public function toDatabase($notifiable)
     {
         return [            
-            'usuario' => $this->usuario,
-            'situacion' => $this->situacion,        
+            'profesor' => $this->profesor,
+            'alumno' => $this->situacion->estudiante_reportado,   
+            'fecha' => $this->situacion->fecha,        
         ];
     }
 }

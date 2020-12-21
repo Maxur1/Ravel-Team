@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Situation;
 use App\Asignatura;
+use App\User;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -54,10 +56,15 @@ class SituationController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show($id)
+    public function show($fecha)
     {
-        $situaciones = Situation::find($id);
-        return view('situation.show', compact('situaciones'));
+        $situaciones = Situation::all()->where('fecha','=',$fecha);
+        
+        foreach ($situaciones as $situation)
+        {
+            $sit = $situation;
+        }
+        return view('situation.show', compact('sit'));
     }
 
     /**
@@ -105,27 +112,25 @@ class SituationController extends Controller
                 'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
             );
     
-            Situation::create($form_data);
+            $situation = Situation::create($form_data);
 
-            /* Enviar notificación email a los profesores
+            $profesor = Auth::user();
 
-            // Obtengo la id del trabajo al que está relacionado el avance
-            $trabajo_id = $request->idTrabajo;
-            // Buscar a los profesores relacionados al trabajo
-            $trabajo = Trabajo::findOrFail($trabajo_id);
-            $profesores = $trabajo->profesores;
+            // Enviar notificación email a los profesores
+
+            $jefes = User::all()->where('rol','=','Jefe de Carrera');
             // Por cada profesor guía enviar un email
-            foreach ($profesores as $profesor) {
-                $destinatario_email = $profesor->email;
+            foreach ($jefes as $jefe) {
+                $destinatario_email = $jefe->email;
                 // $destinario_nombre = $profesor->name;
-
+                
                 // Enviar email
-                Mail::to($destinatario_email)->send(new AvanceRegistrado($trabajo, $profesor, $avance));
+                Mail::to($destinatario_email)->send(new SituationMail($situation, $profesor->name));
 
                 // Enviar notificación por plataforma
-                $profesor->notify(new AvanceRegistradoNotif($trabajo, $alumno, $avance));
+                $jefe->notify(new SituationNotification($situation, $profesor->email));
             }
-            */
+            
     
             return back()->with('success','Se registro la situación');
        

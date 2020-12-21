@@ -114,23 +114,25 @@
 
                     @endif
 
-                    <!-- Notificaciones -->                    
-                    <div class="dropdown">
-                        <button style="color: rgba(255,255,255,.75)" class="btn dropdown-toggle" type="button" id="btn_notificacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            Notificaciones <span class="badge" id="cantNotify"> ({{count(Auth::user()->unreadNotifications)}}) </span>
-                        </button>
+                    <!-- Notificaciones -->
+                    @if(Auth::user()->rol === 'Jefe de Carrera')                    
+                        <div class="dropdown">
+                            <button style="color: rgba(255,255,255,.75)" class="btn dropdown-toggle" type="button" id="btn_notificacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Notificaciones <span class="badge" id="cantNotify"> ({{count(Auth::user()->unreadNotifications)}}) </span>
+                            </button>
 
-                            <ul class="dropdown-menu" role="menu" id="ulNotify">                                
-                                @foreach (Auth::user()->unreadNotifications->take(4) as $notification)                                        
-                                        <li class="list-group-item">                                        
-                                            <a onclick="markRead('{{ $notification->id }}')" href="{{route('situation.show', $notification->data['situation']['id'])}}"><i>Nuevo comentario en un avance</b></a>
-                                        </li>
-                                @endforeach
-                                <li class="list-group-item">
-                                    <a href="{{route('notification.index')}}">Ver Todas Las Notificaciones</a>
-                                </li>
-                            </ul>
-                    </div>
+                                <ul class="dropdown-menu" role="menu" id="ulNotify">                                
+                                    @foreach (Auth::user()->unreadNotifications->take(4) as $notification)                                        
+                                            <li class="list-group-item">                                        
+                                                <a onclick="markRead('{{ $notification->id }}')" href="{{route('situation.show', $notification->data['fecha'])}}"><i>Nueva situación</b></a>
+                                            </li>
+                                    @endforeach
+                                    <li class="list-group-item">
+                                        <a href="{{route('notification.index')}}">Ver Todas Las Notificaciones</a>
+                                    </li>
+                                </ul>
+                        </div>
+                    @endif
 
                     <!-- CERRAR SESIÓN -->
                     <li class="nav-item">

@@ -34,6 +34,7 @@ class SituationMail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.avance_registrado');
+        $sit = $this->situacion->estudiante_reportado;
+        return $this->view('mails.situations')->with('profesor',$this->usuario)->with('alumno',$sit);
     }
 }
