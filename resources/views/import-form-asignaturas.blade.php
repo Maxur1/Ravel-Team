@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html>
- <head>
+@extends('layouts.app')
+@section('head')
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+@endsection
+@section('head')
   <title>Importar Asignaturas</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </head>
- <body>
+  @endsection
+  @section('content')
   <br />
   
   <div class="container">
@@ -67,7 +69,7 @@
       <tr>
        <td width="40%" align="right"><label>Ingrese el archivo Excel</label></td>
        <td width="30">
-        <input type="file" name="select_file" class="form-control" />
+        <input type="file" name="select_file"/>
        </td>
        <td width="30%" align="left">
         <input type="submit" name="upload" class="btn btn-primary" value="Subir">
@@ -81,6 +83,4 @@
      </table>
     </div>
    </form>
- 
- </body>
-</html>
+@endsection

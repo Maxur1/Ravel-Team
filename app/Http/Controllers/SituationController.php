@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Situation;
+use App\Asignatura;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Validator;
@@ -16,7 +17,8 @@ class SituationController extends Controller
      */
     public function index()
     {
-        //
+        $asignaturas = Asignatura::all();
+        return view('situation-report')->with('asignaturas',$asignaturas);
     }
 
     /**
@@ -87,30 +89,17 @@ class SituationController extends Controller
 
     public function report(Request $request)
     {
-        /* 
-        $rules = array(
-            'estudiante_atendido'        =>  'required',
-            'descripcion'         =>  'required',
-            'medio_atencion'        =>  'required',
-        );
-
-        $error = Validator::make($request->all(), $rules);
-
-        if($error->fails())
-        {
-            return response()->json(['errors' => $error->errors()->all()]);
-        }
-        */
-        $form_data = array(
-            'estudiante_reportado'        =>  $request->search,
-            'descripcion'         =>  $request->situacion,
-            'medio_atencion'        =>  $request->tipo,
-            'asignatura'    => $request->select_asignatura,
-        );
-
-        Situation::create($form_data);
-
-        return response()->json(['success' => 'Data Added successfully.']);
-
+        
+            $form_data = array(
+                'estudiante_reportado'        =>  $request->search,
+                'descripcion'         =>  $request->situacion,
+                'medio_atencion'        =>  $request->tipo,
+                'asignatura'    => $request->select_asignatura,
+            );
+    
+            Situation::create($form_data);
+    
+            return back()->with('success','Se registro la situación');
+       
     }
 }
