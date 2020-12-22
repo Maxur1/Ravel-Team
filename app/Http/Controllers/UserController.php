@@ -144,7 +144,8 @@ class UserController extends Controller
     public function destroy($id)
     {
         $data = User::findOrFail($id);
-        $data->delete();
+        $data->eliminado = true;
+        $data->save();
     }
 
     public function situationReport()

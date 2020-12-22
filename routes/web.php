@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('welcome',function () {
+    return view('welcome');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -60,3 +64,10 @@ Route::post('/registerAttention', 'AttentionController@registerAttention')->name
 Route::get('autocomplete', 'EstudianteController@autocomplete')->name('autocomplete');
 
 Route::post('/situation-report/fetch', 'EstudianteController@fetch')->name('autocomplete.fetch');
+
+Route::resource('/notification', 'NotificationController');
+
+Route::resource('/situation', 'SituationController');
+
+Route::post('/notification/cantidad', 'NotificationController@cantidad')->name('notificacion.cantidad');
+Route::post('/notification/marcarLeidos', 'NotificationController@marcarLeidos')->name('notificacion.marcarLeidos');

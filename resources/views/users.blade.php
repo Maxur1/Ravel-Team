@@ -1,22 +1,11 @@
 @extends('layouts.app')
 @section('head')
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>  
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 @section('content')
 @guest
 <meta http-equiv="refresh" content="1; URL={{ route('login') }}" />
 @else
-<style>
-    .table_responsive
-    {
-        
-    }
-</style>
   <div class="container">    
         <br />
         <h3 align="center">Lista de Usuarios</h3>
@@ -101,7 +90,13 @@
 @endguest
 @endsection
 @section('scripts')
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <script>
 $(document).ready(function(){
 
@@ -139,9 +134,14 @@ $(document).ready(function(){
   if($('#action').val() == 'Edit')
   {
    action_url = "{{ route('user.update') }}";
+   setTimeout(function(){
+    $('#formModal').modal('hide');
+     $('#users').DataTable().ajax.reload();
+    }, 2000);
   }
 
   $.ajax({
+    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
    url: action_url,
    method:"POST",
    data:$(this).serialize(),
@@ -171,6 +171,7 @@ $(document).ready(function(){
 
  $(document).on('click', '.edit', function(){
   var id = $(this).attr('id');
+  $('#formModal').modal('show');
   $('#form_result').html('');
   $.ajax({
    url :"/user/"+id+"/edit",
@@ -184,7 +185,6 @@ $(document).ready(function(){
     $('.modal-title').text('Editar Registro');
     $('#action_button').val('Editar');
     $('#action').val('Edit');
-    $('#formModal').modal('show');
    }
   })
  });
@@ -200,14 +200,14 @@ $(document).ready(function(){
   $.ajax({
    url:"user/destroy/"+user_id,
    beforeSend:function(){
-    $('#ok_button').text('Deleting...');
+    $('#ok_button').text('OK');
    },
    success:function(data)
    {
     setTimeout(function(){
      $('#confirmModal').modal('hide');
      $('#users').DataTable().ajax.reload();
-     alert('Data Deleted');
+     alert('Usuario Eliminado');
     }, 2000);
    }
   })

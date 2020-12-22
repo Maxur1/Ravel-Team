@@ -1,6 +1,8 @@
-<!DOCTYPE html>
-<html>
- <head>
+@extends('layouts.app')
+@section('head')
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+@endsection
+@section('head')
 <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -9,74 +11,100 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  @include('/layouts/live');
+  @include('/layouts/live')
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </head>
- <style>
-    .search{
-        background-color: #fff;
-        }
-    
-    textarea {
-        resize: none;
-        }
-
- </style>
- <body> 
-  <div class="container">
+@endsection
+@section('content') 
+<div class="container">
    <h3 align="center">Reportar Situación</h3>
     <br />
+    @if($message = Session::get('success'))
+   <div class="alert alert-success alert-block">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+           <strong>{{ $message }}</strong>
+   </div>
+   @endif
    <form method="post" enctype="multipart/form-data" action="{{route('report')}}">
-    {{ csrf_field() }}
-    <div class="form-group">
-        <div id="custom-search-input">
-            <div width="40%" align="left" class="input-group">
-                <label>Estudiante</label>
-                <input type="text" name="search" id="search" class="form-control" placeholder="Ingrese nombre o rut del estudiante" required />
-                <div id="countryList" name="countryList">
-                </div>
-            </div>    
-        </div>
-        <br>
-        <div align="left">
-            <label>Descripción de la situación</label>
-            <textarea name="situacion" class="form-control" rows="3"></textarea>
-        </div>
-        <br>
-        <div width="40%" align="left" class="input-group">
-            <label>Tipo de situación</label>
-            <br>
-            <select id= "tipo" name="tipo" onchange="showresult(this.value)" class="form-control">
-                <option value="Personal">Personal</option> 
-                <option value="Academica">Academica</option>
-            </select>
-        </div>
-        <br>
-        <div width="40%" align="left" class="input-group" id="asignatura" style="display:none">
-            <label>Asignatura</label>
-            <br>
-            <select id= "select_asignatura" name="select_asignatura" class="form-control">
-                @foreach($asignaturas as $asignatura)
-                    <option value="{{$asignatura->nrcAsignaturas}}">{{$asignatura->nrcAsignaturas}} - {{$asignatura->nomAsignaturas}}</option>
-                @endforeach
-            </select>
-            <br>
-            <br>
-        </div>
-        <br>
-        <div align="center">
-            <input type="submit" name="upload" class="btn btn-primary" value="Reportar">   
-        </div>
-    </div>
-   </form>
+        {{ csrf_field() }}
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form method="POST" action="{{ route('registerAttention') }}">
+                            @csrf
 
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="search" id="search" class="form-control" placeholder="Ingrese nombre o rut del estudiante" required/>
+                                    @error('search')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <div id="countryList">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <form class="form-group row" id= "rol">
+                                    <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Descripción') }}</label>
+                                    <textarea id="situacion" name="situacion" class="col-md-6 col-form-label text-md-left" rows="3" required></textarea>
+                                    @error('situacion')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </form>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="carrera" class="col-md-4 col-form-label text-md-right" id="carrera1" name="carrera1">{{ __('Tipo de Situación') }}</label>
+                                <div class="col-md-6">
+                                    <select id= "tipo" name="tipo" onchange="showresult(this.value)" class="form-control">
+                                    <option value="Personal">Personal</option> 
+                                    <option value="Academica">Academica</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="asignatura" class="col-md-4 col-form-label text-md-right" id="asignatura1" name="asignatura1" style="display:none">{{ __('Asignatura') }}</label>
+                                <div class="col-md-6">
+                                    <select id= "select_asignatura" name="select_asignatura" class="form-control" style="display:none">
+                                        <option value=""></option>
+                                        @foreach($asignaturas as $asignatura)
+                                            <option value="{{$asignatura->nrcAsignaturas}}">{{$asignatura->nrcAsignaturas}} - {{$asignatura->nomAsignaturas}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mb-0">
+                                <div class="col-md-6 offset-md-5">
+                                <input type="submit" name="upload" class="btn btn-primary" value="Reportar">   
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+@endsection
+@section('scripts')
    <script>
         function showresult(str) {
             if (str == "Academica") {
-                $("#asignatura").css('display', 'block');
+                $("#asignatura1").css('display', 'block');
+                $("#select_asignatura").css('display', 'block');
                 return;
             }else{
-                $("#asignatura").css('display', 'none'); 
+                $("#asignatura1").css('display', 'none');
+                $("#select_asignatura").css('display', 'none');
 
             }
         }
@@ -105,5 +133,4 @@
             });
         });
 </script>   
-</body>
-</html>
+@endsection 
