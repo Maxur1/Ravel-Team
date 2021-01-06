@@ -113,7 +113,7 @@ class UserController extends Controller
     public function update(Request $request, User $sample_data)
     {
         $rules = array(
-            'name'        =>  'required|alpha',
+            'name'        =>  'required|regex:/^[\p{L}\s-]+$/',
             'email'         =>  'required|email',
             'rol'        =>  'required',
         );
