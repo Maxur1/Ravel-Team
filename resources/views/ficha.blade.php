@@ -20,95 +20,118 @@
     <br />
     <div class="row">
         <div class="col-md-12">
-            <div class="card border-secondary">
-                <div class="card-header">
-                    Atenciones Registradas
+            @if(count($atenciones) != 0)
+                <div class="card border-secondary">
+                    <div class="card-header">
+                        Atenciones Registradas
+                    </div>
+                    <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="tab_trabajo">
+                                    <tr align="center">
+                                        <th>
+                                        Fecha
+                                        </th>
+
+                                        <th >
+                                        Descripción
+                                        </th>
+
+                                        <th>
+                                        Acción
+                                        </th>
+                                    
+                                    </tr>
+                                    
+                                    <tbody>
+                                        @foreach($atenciones as $atencion)
+                                            <tr id='atenciones'>
+                                                <td align="center">
+                                                {{$atencion->fecha}}
+                                                </td>
+                                                <td align="center">
+                                                {{$atencion->descripcion}}
+                                                </td>
+                                                <td align="center">
+                                                    <a href="{{route('atention.show', $atencion->fecha)}}">
+                                                    <input type="submit" name="upload" class="btn btn-primary" value="ver detalles">
+                                                    </a>       
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>  
+                            </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover" id="tab_trabajo">
-                                <tr align="center">
-                                    <th>
-                                    Fecha
-                                    </th>
-
-                                    <th >
-                                    Descripción
-                                    </th>
-
-                                    <th>
-                                    Acción
-                                    </th>
-                                
-                                </tr>
-                                
-                                <tbody>
-                                    @foreach($atenciones as $atencion)
-                                        <tr id='atenciones'>
-                                            <td align="center">
-                                            {{$atencion->fecha}}
-                                            </td>
-                                            <td align="center">
-                                            {{$atencion->descripcion}}
-                                            </td>
-                                            <td align="center">
-                                                <a href="{{route('atention.show', $atencion->fecha)}}">
-                                                <input type="submit" name="upload" class="btn btn-primary" value="ver detalles">
-                                                </a>       
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>  
+            @else
+                <div class="card border-secondary">
+                        <div class="card-header">
+                            Atenciones Registradas
                         </div>
-                </div>
-            </div>
-
-            <br>
-            
-            <div class="card border-secondary">
-                <div class="card-header">
-                    Situaciones Reportadas
-                </div>
-                <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover" id="tab_trabajo">
-                                <tr align="center">
-                                    <th>
-                                    Fecha
-                                    </th>
-
-                                    <th >
-                                    Descripción
-                                    </th>
-
-                                    <th>
-                                    Acción
-                                    </th>
-                                
-                                </tr>
-                                
-                                <tbody>
-                                    @foreach($situaciones as $situacion)
-                                        <tr id='atenciones'>
-                                            <td align="center">
-                                            {{$situacion->fecha}}
-                                            </td>
-                                            <td align="center">
-                                            {{$situacion->descripcion}}
-                                            </td>
-                                            <td align="center">
-                                                <a href="{{route('situation.show', $situacion->fecha)}}">
-                                                <input type="submit" name="upload" class="btn btn-primary" value="ver detalles">
-                                                </a>       
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>  
+                        <div class="card-body">
+                        <h6 align="center">No hay atenciones vinculadas a este estudiante</h6>
                         </div>
+                </div> 
+            @endif
+
+                <br>
+
+            @if(count($situaciones) != 0)
+                <div class="card border-secondary">
+                    <div class="card-header">
+                        Situaciones Reportadas
+                    </div>
+                    <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover" id="tab_trabajo">
+                                    <tr align="center">
+                                        <th>
+                                        Fecha
+                                        </th>
+
+                                        <th >
+                                        Descripción
+                                        </th>
+
+                                        <th>
+                                        Acción
+                                        </th>
+                                    
+                                    </tr>
+                                    
+                                    <tbody>
+                                        @foreach($situaciones as $situacion)
+                                            <tr id='atenciones'>
+                                                <td align="center">
+                                                {{$situacion->fecha}}
+                                                </td>
+                                                <td align="center">
+                                                {{$situacion->descripcion}}
+                                                </td>
+                                                <td align="center">
+                                                    <a href="{{route('situation.show', $situacion->fecha)}}">
+                                                    <input type="submit" name="upload" class="btn btn-primary" value="ver detalles">
+                                                    </a>       
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>  
+                            </div>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="card border-secondary">
+                        <div class="card-header">
+                            Situaciones Registradas
+                        </div>
+                        <div class="card-body">
+                        <h6 align="center">No hay situaciones vinculadas a este estudiante</h6>
+                        </div>
+                </div> 
+            @endif
+
             <br>
         </div>
     </div>
