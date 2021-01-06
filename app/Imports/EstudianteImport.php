@@ -50,6 +50,4 @@ class EstudianteImport implements ToModel,WithHeadingRow, WithValidation,SkipsOn
             'Correo' => 'required|nullable|email',
         ];
     }
-
-
 }
