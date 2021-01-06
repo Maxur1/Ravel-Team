@@ -83,10 +83,19 @@
                     <!-- Si el usuario es un Jefe de Carrera... -->
                     @elseif(Auth::user()->rol === 'Jefe de Carrera')
                     <li class="nav-item">
-                        <a class="nav-link" href="http://127.0.0.1:8000/import-form">Añadir Estudiantes<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://127.0.0.1:8000/import-form-asignaturas">Añadir Asignaturas<span class="sr-only">(current)</span></a>
+                        <div class="dropdown">
+                            <button style="color: rgba(255,255,255,.75)" class="btn dropdown-toggle" type="button" id="btn_notificacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Añadir
+                            </button>
+                                <ul class="dropdown-menu" role="menu" id="ulNotify">                                                          
+                                    <li class="list-group-item">
+                                        <a href="http://127.0.0.1:8000/import-form">Añadir Estudiantes</a>                                        
+                                    </li>
+
+                                    <li class="list-group-item">
+                                    <a href="http://127.0.0.1:8000/import-form-asignaturas">Añadir Asignaturas</a>
+                                    </li>
+                                </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:8000/sample">Editar Correo Estudiantes<span class="sr-only">(current)</span></a>
@@ -94,14 +103,44 @@
                     <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:8000/attention-register">Registrar Atención<span class="sr-only">(current)</span></a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/ficha-estudiantes">Generar Ficha<span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button style="color: rgba(255,255,255,.75)" class="btn dropdown-toggle" type="button" id="btn_notificacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Consultar
+                            </button>
+                                <ul class="dropdown-menu" role="menu" id="ulNotify">                                                          
+                                    <li class="list-group-item">
+                                        <a href="http://127.0.0.1:8000/consulta-profesor">Consultar Profesor</a>                                        
+                                    </li>
+
+                                    <li class="list-group-item">
+                                    <a href="http://127.0.0.1:8000/consulta-asignatura">Consultar Asignatura</a>
+                                    </li>
+                                </ul>
+                    </li>
                     <!-- Si el usuario es un Secretaria... -->
                     @elseif(Auth::user()->rol === 'Secretario')
                     <li class="nav-item">
-                        <a class="nav-link" href="http://127.0.0.1:8000/import-form">Añadir Estudiantes<span class="sr-only">(current)</span></a>
+                        <div class="dropdown">
+                            <button style="color: rgba(255,255,255,.75)" class="btn dropdown-toggle" type="button" id="btn_notificacion" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Añadir
+                            </button>
+                                <ul class="dropdown-menu" role="menu" id="ulNotify">                                                          
+                                    <li class="list-group-item">
+                                        <a href="http://127.0.0.1:8000/import-form">Añadir Estudiantes</a>                                        
+                                    </li>
+
+                                    <li class="list-group-item">
+                                    <a href="http://127.0.0.1:8000/import-form-asignaturas">Añadir Asignaturas</a>
+                                    </li>
+                                </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://127.0.0.1:8000/import-form-asignaturas">Añadir Asignaturas<span class="sr-only">(current)</span></a>
-                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="http://127.0.0.1:8000/sample">Editar Correo Estudiantes<span class="sr-only">(current)</span></a>
                     </li>
@@ -228,7 +267,7 @@
                     query: {{Auth::user()->id}}, 
                 },
                 success: function(data) {
-                    cambiarNotificacionesVen(data);
+                    //cambiarNotificacionesVen(data);
                 }
             });
         }

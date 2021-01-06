@@ -69,5 +69,20 @@ Route::resource('/notification', 'NotificationController');
 
 Route::resource('/situation', 'SituationController');
 
+Route::resource('/atention', 'AttentionController');
+
 Route::post('/notification/cantidad', 'NotificationController@cantidad')->name('notificacion.cantidad');
 Route::post('/notification/marcarLeidos', 'NotificationController@marcarLeidos')->name('notificacion.marcarLeidos');
+
+Route::get('/ficha-estudiantes', 'EstudianteController@fichaEstudiantes');
+Route::post('/generar-ficha', 'EstudianteController@generarFicha')->name('generarFicha');
+
+Route::get('/consulta-profesor', 'UserController@consultarProfesor');
+Route::post('/consulta', 'UserController@consulta')->name('consulta');
+Route::get('autocomplete1', 'UserController@autocomplete1')->name('autocomplete1');
+Route::post('/consulta-profesor/fetch', 'UserController@fetch')->name('autocomplete1.fetch');
+
+Route::get('/consulta-asignatura', 'AsignaturasController@consultarAsignatura');
+Route::post('/consultaAsignatura', 'AsignaturasController@consultaAsignatura')->name('consultaAsignatura');
+Route::get('autocomplete2', 'AsignaturasController@autocomplete2')->name('autocomplete2');
+Route::post('/consulta-asignatura/fetch', 'AsignaturasController@fetch')->name('autocomplete2.fetch');

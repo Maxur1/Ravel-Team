@@ -62,7 +62,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="carrera" class="col-md-4 col-form-label text-md-right" id="carrera1" name="carrera1">{{ __('Tipo de Situación') }}</label>
+                            <label for="carrera" class="col-md-4 col-form-label text-md-right" id="carrera1" name="carrera1">{{ __('Medio de Atención') }}</label>
                             <div class="col-md-6">
                                 <select id= "tipo" name="tipo" class="form-control">
                                 <option value="Personal">Personal</option> 

@@ -38,5 +38,5 @@ class AsignaturasImport implements ToModel,WithHeadingRow, WithValidation,SkipsO
             'NRC' => ['required','integer','unique:asignaturas,nrcAsignaturas'],
             'Asignatura' => 'required',
         ];
-    }   
+    }
 }
