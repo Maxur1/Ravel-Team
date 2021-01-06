@@ -53,8 +53,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $rules = array(
-            'name'        =>  'required',
-            'email'         =>  'required',
+            'name'        =>  'required|alpha',
+            'email'         =>  'required|email',
             'rol'        =>  'required',
         );
 
@@ -113,7 +113,7 @@ class UserController extends Controller
     public function update(Request $request, User $sample_data)
     {
         $rules = array(
-            'name'        =>  'required',
+            'name'        =>  'required|alpha',
             'email'         =>  'required|email',
             'rol'        =>  'required',
         );
