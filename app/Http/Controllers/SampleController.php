@@ -116,7 +116,7 @@ class SampleController extends Controller
     public function update(Request $request, Estudiante $sample_data)
     {
         $rules = array(
-            'correo'        =>  'required'
+            'correo'        =>  'required|email'
         );
 
         $error = Validator::make($request->all(), $rules);

@@ -25,7 +25,7 @@
                     <table class="table table-bordered table-hover">
                         <tbody id="tablaTrabajos" class="table-hover">
                             <?php $cant=0; ?>
-                            @foreach(Auth::user()->unreadNotifications  as $notification)
+                            @foreach(Auth::user()->Notifications  as $notification)
                                
                                     <tr>
                                         <a onclick="markRead('{{ $notification->id }}')" style="vertical-align: middle" href="{{route('situation.show', $notification->data['fecha'])}}"> 

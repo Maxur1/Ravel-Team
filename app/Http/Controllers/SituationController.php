@@ -6,6 +6,7 @@ use Auth;
 use App\Situation;
 use App\Asignatura;
 use App\User;
+use App\Estudiante;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -59,12 +60,14 @@ class SituationController extends Controller
     public function show($fecha)
     {
         $situaciones = Situation::all()->where('fecha','=',$fecha);
+
+        $asignaturas = Asignatura::all();
         
         foreach ($situaciones as $situation)
         {
             $sit = $situation;
         }
-        return view('situation.show', compact('sit'));
+        return view('situation.show', compact('sit'))->with('asignaturas',$asignaturas);
     }
 
     /**
@@ -103,36 +106,55 @@ class SituationController extends Controller
 
     public function report(Request $request)
     {
+
+        $search1 = $request->search;
+
+        $palabras = explode (" ", $search1);
+
+        //dd($palabras[0]);
+
+        if(count($palabras) != 3)
+        {
+            return back()->with('error','Nombre de Alumno incorrecto');
+        }
+        else
+        {
+            if(Estudiante::where('apellidoPaterno', '=', $palabras[1])->where('apellidoMaterno', '=', $palabras[2])->exists())
+            {
+                $form_data = array(
+                    'estudiante_reportado'        =>  $request->search,
+                    'descripcion'         =>  $request->situacion,
+                    'medio_atencion'        =>  $request->tipo,
+                    'asignatura'    => $request->select_asignatura,
+                    'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
+                );
         
-            $form_data = array(
-                'estudiante_reportado'        =>  $request->search,
-                'descripcion'         =>  $request->situacion,
-                'medio_atencion'        =>  $request->tipo,
-                'asignatura'    => $request->select_asignatura,
-                'fecha'         =>  Carbon::parse(Carbon::now('America/Santiago'))->locale('es_ES')->isoFormat('dddd D \d\e MMMM \d\e\l Y HH:mm:ss')
-            );
+                $situation = Situation::create($form_data);
     
-            $situation = Situation::create($form_data);
-
-            $profesor = Auth::user();
-
-            // Enviar notificación email a los profesores
-
-            $jefes = User::all()->where('rol','=','Jefe de Carrera');
-            // Por cada profesor guía enviar un email
-            foreach ($jefes as $jefe) {
-                $destinatario_email = $jefe->email;
-                // $destinario_nombre = $profesor->name;
+                $profesor = Auth::user();
+    
+                // Enviar notificación email a los profesores
+    
+                $jefes = User::all()->where('rol','=','Jefe de Carrera');
+                // Por cada profesor guía enviar un email
+                foreach ($jefes as $jefe) {
+                    $destinatario_email = $jefe->email;
+                    // $destinario_nombre = $profesor->name;
+                    
+                    // Enviar email
+                    Mail::to($destinatario_email)->send(new SituationMail($situation, $profesor->name));
+    
+                    // Enviar notificación por plataforma
+                    $jefe->notify(new SituationNotification($situation, $profesor->email));
+                }
                 
-                // Enviar email
-                Mail::to($destinatario_email)->send(new SituationMail($situation, $profesor->name));
-
-                // Enviar notificación por plataforma
-                $jefe->notify(new SituationNotification($situation, $profesor->email));
+        
+                return back()->with('success','Se registro la situación');
             }
-            
-    
-            return back()->with('success','Se registro la situación');
-       
+            else
+            {
+                return back()->with('error','El estudiante no existe en la base de datos');
+            }
+        }
     }
 }

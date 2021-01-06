@@ -15,7 +15,7 @@
         <div class="col-md-12">
             <div class="card border-secondary">
                 <div class="card-header">
-                    Situación Reportada
+                    Atención Registrada
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -23,10 +23,10 @@
                             <tbody>
                                 <tr id='avances'>
                                     <td style="vertical-align: middle">
-                                        Fecha de la Situación
+                                        Fecha de la Atención
                                     </td>
                                     <td>
-                                        <input name="fecha" class="form-control" type="text" value="{{ $sit->fecha }}" readonly>
+                                        <input name="fecha" class="form-control" type="text" value="{{ $atencion->fecha }}" readonly>
                                     </td>
                                 </tr>
 
@@ -35,7 +35,7 @@
                                         Alumno
                                     </td>
                                     <td>
-                                        <input name="alumno" class="form-control" type="text" value="{{ $sit->estudiante_reportado }}" readonly>
+                                        <input name="alumno" class="form-control" type="text" value="{{ $atencion->estudiante_atendido }}" readonly>
                                     </td>
                                 </tr>
 
@@ -44,27 +44,41 @@
                                         Descripción
                                     </td>
                                     <td>
-                                        <input name="texto" class="form-control" type="text" value="{{ $sit->descripcion }}" readonly>
+                                        <input name="texto" class="form-control" type="text" value="{{ $atencion->descripcion }}" readonly>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: middle">
-                                        Tipo de Situación
+                                        Medio de Atención
                                     </td>
                                     <td>
-                                        <input name="tipo" class="form-control" type="text" value="{{$sit->medio_atencion}}" readonly>
+                                        <input name="tipo" class="form-control" type="text" value="{{$atencion->medio_atencion}}" readonly>
                                     </td>
                                 </tr>
-
-                                @if($sit->asignatura != null)
+                                @if($atencion->asignatura != null)
                                 <tr>
                                     <td style="vertical-align: middle">
                                         Asignatura
                                     </td>
                                     @foreach($asignaturas as $asignatura)
-                                        @if($asignatura->nrcAsignaturas === $sit->asignatura)
+                                        @if($asignatura->nrcAsignaturas === $atencion->asignatura)
                                             <td>
                                                 <input name="tipo" class="form-control" type="text" value="{{$asignatura->nrcAsignaturas}} - {{$asignatura->nomAsignaturas}}" readonly>
+                                            </td>
+                                        @endif
+                                    @endforeach
+                                </tr>
+                                @endif
+
+                                @if($atencion->profesor != null)
+                                <tr>
+                                    <td style="vertical-align: middle">
+                                        Profesor
+                                    </td>
+                                    @foreach($profesores as $profesor)
+                                        @if($profesor->email === $atencion->profesor)
+                                            <td>
+                                                <input name="tipo" class="form-control" type="text" value="{{$profesor->name}}" readonly>
                                             </td>
                                         @endif
                                     @endforeach

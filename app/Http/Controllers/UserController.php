@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Asignatura;
+use App\Attention;
 use Illuminate\Http\Request;
 use DataTables;
 use Validator;
@@ -112,7 +114,7 @@ class UserController extends Controller
     {
         $rules = array(
             'name'        =>  'required',
-            'email'         =>  'required',
+            'email'         =>  'required|email',
             'rol'        =>  'required',
         );
 
@@ -153,13 +155,47 @@ class UserController extends Controller
         return view('situation-report');
     }
 
-    public function report(Request $request)
+    public function autocomplete1(Request $request)
     {
-        $data = $request->request;
+        $search = $request->get('term');
+
+        $reemplazos = array(
+            '-'             => '',
+            '.'             => ''
+        );
+
+        $search = strtr( $search , $reemplazos);
+      
+        $result = User::where('rol','=','Profesor')->where('name', 'LIKE', '%'. $search. '%')->get();
+
+        return response()->json($result);
     }
 
-    public function registerAttention(Request $request)
+    public function consultarProfesor()
     {
-         $data = $request->request;
+        return view('consulta-profesor');
+    }
+
+    public function consulta(Request $request)
+    {
+        $search1 = $request->search;
+
+        //dd($palabras[0]);
+
+        if(User::where('name', '=', $search1)->exists())
+        {
+            $profesores = User::where('name', '=', $search1)->get();
+            foreach($profesores as $profesor)
+            {
+                $profe = $profesor;
+            }
+            $atenciones = Attention::all()->where('profesor','=',$profe->email);
+            
+            return view("consulta")->with('profesor',$profe)->with('atenciones',$atenciones);
+        }
+        else
+        {
+            return back()->with('error','El profesor no existe en la base de datos');
+        }
     }
 }
