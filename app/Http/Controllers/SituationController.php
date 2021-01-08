@@ -10,7 +10,6 @@ use App\Estudiante;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Asignatura;
 use Validator;
 use App\Mail\SituationMail;
 use App\Notifications\SituationNotification;
