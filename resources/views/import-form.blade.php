@@ -19,17 +19,6 @@
   <div class="container">
    <h3 align="center">Importar Estudiantes</h3>
     <br />
-    @if(isset($errors) && $errors->any())
-    <div class="alert alert-danger">
-        Error al subir archivo<br><br>
-      <ul>
-        @foreach($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
-    @endif
-
     @if(session()->has('failures'))
     <div class="alert alert-danger">
         El archivo se subió con {{count(session()->get('failures'))}} problemas:<br>

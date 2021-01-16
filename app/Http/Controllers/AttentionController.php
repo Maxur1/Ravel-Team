@@ -26,27 +26,36 @@ class AttentionController extends Controller
         return view('attention-register')->with('asignaturas',$asignaturas)->with('profesores',$profesores);
     }
 
+    public function show($fecha)
+    {
+        $atenciones = Attention::all()->where('fecha','=',$fecha);
+
+        $asignaturas = Asignatura::all();
+        $profesores = User::all()->where('rol','=','Profesor');
+        
+        foreach ($atenciones as $atencion)
+        {
+            $atencion = $atencion;
+        }
+        return view('atention.show', compact('atencion'))->with('asignaturas',$asignaturas)->with('profesores',$profesores);
+    }
+
     public function registerAttention(Request $request)
     {
-        /*
+        
         $search1 = $request->search;
-
-        $reemplazos = array(
-            '-'             => '',
-            '.'             => ''
-        );
-
-        $search1 = strtr( $search1 , $reemplazos);
 
         $palabras = explode (" ", $search1);
 
-        if(Estudiante::where('nombre', '==', $search1))
+        //dd($palabras[0]);
+
+        if(count($palabras) != 3)
         {
             return back()->with('error','Nombre de Alumno incorrecto');
         }
         else
         {
-            if(Estudiante::where([['nombre', '=', '%'. $palabras[0]. '%'],['apellidoPaterno', '=', '%'. $palabras[1]. '%'],['apellidoMaterno', '=', '%'. $palabras[2]. '%']]))
+            if(Estudiante::where('apellidoPaterno', '=', $palabras[1])->where('apellidoMaterno', '=', $palabras[2])->exists())
             {
                 $form_data = array(
                     'estudiante_atendido'        =>  $request->search,
@@ -66,8 +75,8 @@ class AttentionController extends Controller
                 return back()->with('error','El estudiante no existe en la base de datos');
             }
         }
-        */
         
+        /*
         $form_data = array(
             'estudiante_atendido'        =>  $request->search,
             'descripcion'         =>  $request->situacion,
@@ -80,5 +89,6 @@ class AttentionController extends Controller
         Attention::create($form_data);
         
         return back()->with('success','Se registro la atención');
+        */
     }
 }
